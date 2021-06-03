@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>edu.miu.cs544.group1.project.domain</OriginalElement>
+  <nodes>
+    <node x="15.0" y="412.5">edu.miu.cs544.group1.project.domain.Course</node>
+    <node x="1018.7345454545455" y="765.5745454545456">edu.miu.cs544.group1.project.domain.User</node>
+    <node x="15.0" y="273.7036363636364">edu.miu.cs544.group1.project.domain.Location</node>
+    <node x="-12.5" y="727.110909090909">edu.miu.cs544.group1.project.domain.CourseOffering</node>
+    <node x="766.4109090909092" y="573.1036363636363">edu.miu.cs544.group1.project.domain.Student</node>
+    <node x="766.4109090909092" y="765.5745454545456">edu.miu.cs544.group1.project.domain.Person</node>
+    <node x="263.7781818181818" y="273.7036363636364">edu.miu.cs544.group1.project.domain.TimeSlot</node>
+    <node x="240.7781818181818" y="433.2345454545454">edu.miu.cs544.group1.project.domain.ClassSession</node>
+    <node x="606.0745454545454" y="433.2345454545454">edu.miu.cs544.group1.project.domain.AttendanceRecord</node>
+    <node x="323.5" y="789.26">edu.miu.cs544.group1.project.domain.Faculty</node>
+    <node x="1008.8799999999999" y="582.7963636363637">edu.miu.cs544.group1.project.domain.Role</node>
+    <node x="452.08363636363634" y="591.6838574888973">edu.miu.cs544.group1.project.domain.Registration</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="edu.miu.cs544.group1.project.domain.AttendanceRecord" target="edu.miu.cs544.group1.project.domain.Student" relationship="TO_ONE">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="edu.miu.cs544.group1.project.domain.Course" target="edu.miu.cs544.group1.project.domain.CourseOffering" relationship="TO_MANY">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="edu.miu.cs544.group1.project.domain.CourseOffering" target="edu.miu.cs544.group1.project.domain.Faculty" relationship="TO_ONE">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="edu.miu.cs544.group1.project.domain.Person" target="edu.miu.cs544.group1.project.domain.User" relationship="TO_ONE">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="edu.miu.cs544.group1.project.domain.User" target="edu.miu.cs544.group1.project.domain.Person" relationship="TO_ONE">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="edu.miu.cs544.group1.project.domain.Registration" target="edu.miu.cs544.group1.project.domain.Student" relationship="TO_ONE">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="edu.miu.cs544.group1.project.domain.ClassSession" target="edu.miu.cs544.group1.project.domain.TimeSlot" relationship="TO_MANY">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="edu.miu.cs544.group1.project.domain.ClassSession" target="edu.miu.cs544.group1.project.domain.CourseOffering" relationship="TO_ONE">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="edu.miu.cs544.group1.project.domain.AttendanceRecord" target="edu.miu.cs544.group1.project.domain.ClassSession" relationship="TO_ONE">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="edu.miu.cs544.group1.project.domain.Registration" target="edu.miu.cs544.group1.project.domain.CourseOffering" relationship="TO_ONE">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="edu.miu.cs544.group1.project.domain.User" target="edu.miu.cs544.group1.project.domain.Role" relationship="TO_MANY">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="edu.miu.cs544.group1.project.domain.Faculty" target="edu.miu.cs544.group1.project.domain.Person" relationship="GENERALIZATION">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="edu.miu.cs544.group1.project.domain.CourseOffering" target="edu.miu.cs544.group1.project.domain.ClassSession" relationship="TO_MANY">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="edu.miu.cs544.group1.project.domain.Student" target="edu.miu.cs544.group1.project.domain.Person" relationship="GENERALIZATION">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="edu.miu.cs544.group1.project.domain.Student" target="edu.miu.cs544.group1.project.domain.Registration" relationship="TO_MANY">
+      <point x="0.0" y="0.0" />
+      <point x="618.0627329077945" y="607.1838574888973" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="edu.miu.cs544.group1.project.domain.ClassSession" target="edu.miu.cs544.group1.project.domain.Location" relationship="TO_ONE">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="edu.miu.cs544.group1.project.domain.CourseOffering" target="edu.miu.cs544.group1.project.domain.Registration" relationship="TO_MANY">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="edu.miu.cs544.group1.project.domain.CourseOffering" target="edu.miu.cs544.group1.project.domain.Course" relationship="TO_ONE">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+  </edges>
+  <settings layout="Edge Bundled Organic" zoom="0.9470432480141218" showDependencies="true" x="543.5" y="547.0" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
