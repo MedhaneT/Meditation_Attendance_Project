@@ -18,7 +18,6 @@ public class JPAUserDetails implements UserDetails {
     String password;
     String ssn;
     String blockchainToken;
-    boolean isActive;
     Set<Role> roles;
 
     public JPAUserDetails(User user) {
@@ -62,6 +61,6 @@ public class JPAUserDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return isActive;
+        return true;
     }
 }
