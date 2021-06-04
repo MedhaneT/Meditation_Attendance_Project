@@ -4,14 +4,11 @@ import edu.miu.cs544.group1.project.controller.dto.RegisterUserDto;
 import edu.miu.cs544.group1.project.domain.Faculty;
 import edu.miu.cs544.group1.project.domain.Role;
 import edu.miu.cs544.group1.project.domain.Student;
-import edu.miu.cs544.group1.project.domain.TimeSlot;
 import edu.miu.cs544.group1.project.domain.enumerated.RoleCode;
 import edu.miu.cs544.group1.project.repository.RoleRepository;
-import edu.miu.cs544.group1.project.repository.TimeSlotRepository;
 import edu.miu.cs544.group1.project.repository.UserRepository;
 import edu.miu.cs544.group1.project.service.UserService;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,14 +16,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.time.LocalTime;
-
 @Configuration
 @Log4j2
 public class InitializeData {
-    @Autowired
-    private TimeSlotRepository timeSlotRepository;
-
     @Bean
     public CommandLineRunner loadData(
             RoleRepository repository, UserRepository userRepository, UserService userService, PasswordEncoder passwordEncoder) {
@@ -77,13 +69,6 @@ public class InitializeData {
                         SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
                     }
             );
-
-            log.info("TimeSlots:");
-            timeSlotRepository.save(new TimeSlot("AM", LocalTime.of(10, 0), LocalTime.of(12, 30), "Morning"));
-            timeSlotRepository.save(new TimeSlot("PM", LocalTime.of(13, 30), LocalTime.of(16, 0), "Afternoon"));
-
-            timeSlotRepository.findAll().forEach(System.out::println);
-            log.info("Locations:");
         };
     }
 }
