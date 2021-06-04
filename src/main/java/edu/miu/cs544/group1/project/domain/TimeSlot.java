@@ -1,6 +1,8 @@
 package edu.miu.cs544.group1.project.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +11,8 @@ import java.time.LocalTime;
 
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class TimeSlot {
     @Id
     @Column(length = 2, nullable = false)
