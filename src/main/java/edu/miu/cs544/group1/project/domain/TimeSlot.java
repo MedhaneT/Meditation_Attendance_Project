@@ -17,4 +17,13 @@ public class TimeSlot {
     private LocalTime startTime;
     private LocalTime endTime;
     private String description;
+
+    public TimeSlot(LocalTime startTime , LocalTime endTime ){
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
+
+    public TimeSlot() {
+
+    }
 }

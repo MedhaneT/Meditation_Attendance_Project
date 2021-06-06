@@ -1,0 +1,62 @@
+header {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    background-color: #4805c5;
+    height: 4em;
+    width: 100%;
+}
+footer {
+    display: flex;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    height: 50px;
+    background-color: #eeeeee;
+    width: 100%;
+}
+footer div {
+    margin-left: 1em;
+    margin-right: 1em;
+    color: #ababab;
+    width: 100%;
+}
+.small-instr-text {
+    font-size: small;
+}
+table {
+    table-layout: fixed;
+    border-collapse: collapse;
+    width: 100%;
+    border: 2px solid #ababab;
+    padding: 0.5em;
+}
+table > caption {
+    font-weight: bold;
+    font-size: 1em;
+    background-color: blue;
+    color: white;
+    border: 1px solid blue;
+    padding: 0.6em;
+    text-align: left;
+    border-radius: 8% 8% 0% 0%;
+}
+table > thead {
+    text-align: left;
+}
+table thead tr th {
+    border-bottom: 2px solid #ababab;
+}
+table thead th:nth-child(1) {
+    width: 6%;
+}
+table thead th:nth-child(2) {
+    width: 25%;
+}
+table thead th:nth-child(3) {
+    width: 35%;
+}
+table thead th, table tbody td {
+    border: 2px solid #ababab;
+    padding: 0.3em;
+}

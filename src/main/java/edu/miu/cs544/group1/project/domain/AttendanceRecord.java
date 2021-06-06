@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Entity
 @Data
@@ -20,4 +21,8 @@ public class AttendanceRecord {
     @ManyToOne
     @JoinColumn
     private ClassSession session;
+
+    public AttendanceRecord(LocalTime now, Student stud, ClassSession session) {
+
+    }
 }
