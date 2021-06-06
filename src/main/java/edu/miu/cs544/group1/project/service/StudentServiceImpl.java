@@ -18,4 +18,11 @@ public class StudentServiceImpl implements StudentService {
     public List<Student> findAll() {
         return repository.findAll();
     }
+
+    @Override
+    public Student findById(Long id) {
+        return repository.findById(id).get();
+    }
+
+
 }
