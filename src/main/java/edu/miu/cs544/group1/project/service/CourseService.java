@@ -14,10 +14,10 @@ public interface CourseService {
     // delete
 
     List<Course> findAll();
-    Optional<Course> findById(Long id );
-    Optional<Course> findByCode(String name);
-    void createCource(Course course);
-    void removeCource(Long id);
+//    Optional<Course> findById(Long id );
+//    Optional<Course> findByCode(String name);
+//    void createCource(Course course);
+//    void removeCource(Long id);
     
     
     

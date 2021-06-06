@@ -58,6 +58,95 @@ public class InitializeData {
                 userService.registerUser(userDto);
             }
 
+            {
+                RegisterUserDto userDto = new RegisterUserDto(
+                        "medhane@gmail.com",
+                        passwordEncoder.encode("111111"),
+                        new Student("Medhane", "TS", "11111", "000-111222"),
+                        RoleCode.STUDENT);
+                userService.registerUser(userDto);
+            }
+            {
+                RegisterUserDto userDto = new RegisterUserDto(
+                        "brhin@gmail.com",
+                        passwordEncoder.encode("222222"),
+                        new Student("Brhane", "Dk", "11112", "000-222333"),
+                        RoleCode.STUDENT);
+                userService.registerUser(userDto);
+            }
+            {
+                RegisterUserDto userDto = new RegisterUserDto(
+                        "misgna@gmail.com",
+                        passwordEncoder.encode("333333"),
+                        new Student("Misgna", "KK", "11113", "000-333444"),
+                        RoleCode.STUDENT);
+                userService.registerUser(userDto);
+            }
+            {
+                RegisterUserDto userDto = new RegisterUserDto(
+                        "Teddy@gmail.com",
+                        passwordEncoder.encode("444444"),
+                        new Student("Teddy", "SS", "11114", "000-444555"),
+                        RoleCode.STUDENT);
+                userService.registerUser(userDto);
+            }
+            {
+                RegisterUserDto userDto = new RegisterUserDto(
+                        "Bob@gmail.com",
+                        passwordEncoder.encode("444444"),
+                        new Student("Bob", "DD", "11115", "000-555666"),
+                        RoleCode.STUDENT);
+                userService.registerUser(userDto);
+            }
+            {
+                RegisterUserDto userDto = new RegisterUserDto(
+                        "john@gmail.com",
+                        passwordEncoder.encode("555555"),
+                        new Student("John", "Dow", "11116", "000-677766"),
+                        RoleCode.STUDENT);
+                userService.registerUser(userDto);
+            }
+            {
+                RegisterUserDto userDto = new RegisterUserDto(
+                        "mohamed@gmail.com",
+                        passwordEncoder.encode("672456"),
+                        new Student("Mohammed", "Beshir", "11117", "000-777888"),
+                        RoleCode.STUDENT);
+                userService.registerUser(userDto);
+            }
+            {
+                RegisterUserDto userDto = new RegisterUserDto(
+                        "sam@gmail.com",
+                        passwordEncoder.encode("672456"),
+                        new Student("Sam", "Mm", "11118", "000-888999"),
+                        RoleCode.STUDENT);
+                userService.registerUser(userDto);
+            }
+            {
+                RegisterUserDto userDto = new RegisterUserDto(
+                        "isabella@gmail.com",
+                        passwordEncoder.encode("678756"),
+                        new Student("Isabella", "Jocob", "11119", "000-999000"),
+                        RoleCode.STUDENT);
+                userService.registerUser(userDto);
+            }
+            {
+                RegisterUserDto userDto = new RegisterUserDto(
+                        "will@gmail.com",
+                        passwordEncoder.encode("678906"),
+                        new Student("William", "Alex", "11120", "000-999111"),
+                        RoleCode.STUDENT);
+                userService.registerUser(userDto);
+            }
+            {
+                RegisterUserDto userDto = new RegisterUserDto(
+                        "zoe@gmail.com",
+                        passwordEncoder.encode("678906"),
+                        new Student("Hailey", "Caleb", "11121", "000-999222"),
+                        RoleCode.STUDENT);
+                userService.registerUser(userDto);
+            }
+
             log.info("Registered Users:");
             log.info("--------------------------------------------------------------");
             userRepository.findAll().forEach(
