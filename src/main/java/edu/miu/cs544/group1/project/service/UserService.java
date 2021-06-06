@@ -4,7 +4,7 @@ import edu.miu.cs544.group1.project.controller.dto.RegisterUserDto;
 import edu.miu.cs544.group1.project.domain.User;
 
 public interface UserService {
-     / creat
+    // creat
     // read
     // update
     // delete
