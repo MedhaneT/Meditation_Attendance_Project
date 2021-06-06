@@ -1,0 +1,23 @@
+server:
+  port: 8081
+spring:
+  security:
+    user:
+      password: 0aa7957e-9ba6-45fd-9f54-bb48782758a7
+  application:
+    name: sample-springdata-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/cs544
+    username: root
+    password: root
+    driverClassName: com.mysql.cj.jdbc.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
