@@ -19,25 +19,25 @@ public class CourseServiceImpl implements CourseService {
         return courseRepository.findAll();
     }
 
-    @Override
-    public Optional<Course> findById(Long id) {
-        return courseRepository.findById(id);
-    }
-
-    @Override
-    public Optional<Course> findByCode(String code) {
-        return courseRepository.findByCode(code);
-    }
-
-    @Override
-    public void createCource(Course course) {
-        courseRepository.save(course);
-    }
-
-    @Override
-    public void removeCource(Long id) {
-        courseRepository.deleteById(id);
-    }
+//    @Override
+//    public Optional<Course> findById(Long id) {
+//        return courseRepository.findById(id);
+//    }
+//
+//    @Override
+//    public Optional<Course> findByCode(String code) {
+//        return courseRepository.findByCode(code);
+//    }
+//
+//    @Override
+//    public void createCource(Course course) {
+//        courseRepository.save(course);
+//    }
+//
+//    @Override
+//    public void removeCource(Long id) {
+//        courseRepository.deleteById(id);
+//    }
     
     
 //     @Autowired
