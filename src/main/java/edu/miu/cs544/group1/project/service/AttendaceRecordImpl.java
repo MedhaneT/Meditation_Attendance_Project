@@ -59,6 +59,7 @@ public class AttendaceRecordImpl implements AttendaceRecordService{
                 ClassSession session = new ClassSession(location , timeSlotList);
                 AttendanceRecord attendanceRecord = new AttendanceRecord(LocalTime.now() ,stud , session);
                 attendaceRecordRepository.save(attendanceRecord);
+
                 System.out.println(attendanceRecord);
             }
         }
