@@ -1,5 +1,7 @@
 package edu.miu.cs544.group1.project.controller;
 
+import edu.miu.cs544.group1.project.controller.dto.RegistrationDto;
+import edu.miu.cs544.group1.project.domain.Course;
 import edu.miu.cs544.group1.project.domain.Registration;
 import edu.miu.cs544.group1.project.service.CourseRegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +17,5 @@ public class CourseRegistrationController {
     @Autowired
     private CourseRegistrationService courseRegistrationService;
 
-    @GetMapping("/userRegistrations")
-    public List<Registration> findAll(){
-        return courseRegistrationService.findAll();
-    }
+
 }
