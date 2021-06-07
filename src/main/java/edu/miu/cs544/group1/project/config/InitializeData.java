@@ -1,12 +1,13 @@
 package edu.miu.cs544.group1.project.config;
 
+import edu.miu.cs544.group1.project.controller.dto.LocationDto;
 import edu.miu.cs544.group1.project.controller.dto.RegisterUserDto;
-import edu.miu.cs544.group1.project.domain.Faculty;
-import edu.miu.cs544.group1.project.domain.Role;
-import edu.miu.cs544.group1.project.domain.Student;
+import edu.miu.cs544.group1.project.domain.*;
 import edu.miu.cs544.group1.project.domain.enumerated.RoleCode;
+import edu.miu.cs544.group1.project.repository.LocationRepository;
 import edu.miu.cs544.group1.project.repository.RoleRepository;
 import edu.miu.cs544.group1.project.repository.UserRepository;
+import edu.miu.cs544.group1.project.service.LocationService;
 import edu.miu.cs544.group1.project.service.UserService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.boot.CommandLineRunner;
@@ -21,7 +22,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class InitializeData {
     @Bean
     public CommandLineRunner loadData(
-            RoleRepository repository, UserRepository userRepository, UserService userService, PasswordEncoder passwordEncoder) {
+            RoleRepository repository, UserRepository userRepository, UserService userService, PasswordEncoder passwordEncoder, LocationRepository locationRepository, LocationService locationService) {
         return (args) -> {
             userRepository.deleteAll();
             userRepository.deleteAll();
@@ -57,11 +58,12 @@ public class InitializeData {
                         RoleCode.ADMIN);
                 userService.registerUser(userDto);
             }
+            Person person = new Student();
 
             {
                 RegisterUserDto userDto = new RegisterUserDto(
                         "medhane@gmail.com",
-                        passwordEncoder.encode("111111"),
+                        passwordEncoder.encode("123123"),
                         new Student("Medhane", "TS", "11111", "000-111222"),
                         RoleCode.STUDENT);
                 userService.registerUser(userDto);
@@ -145,6 +147,26 @@ public class InitializeData {
                         new Student("Hailey", "Caleb", "11121", "000-999222"),
                         RoleCode.STUDENT);
                 userService.registerUser(userDto);
+            }
+
+            {
+                LocationDto location = new LocationDto(
+                     new Location(1,"VaryHoll",50)
+
+                );
+                locationService.registerLocation(location);
+            }
+            {
+                LocationDto location = new LocationDto(
+                        new Location(2,"Mclaughlin",45)
+                );
+                locationService.registerLocation(location);
+            }
+            {
+                LocationDto location = new LocationDto(
+                        new Location(3,"Argiro",60)
+                );
+                locationService.registerLocation(location);
             }
 
             log.info("Registered Users:");
