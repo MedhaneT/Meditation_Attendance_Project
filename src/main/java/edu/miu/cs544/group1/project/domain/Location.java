@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+@Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,7 +17,4 @@ public class Location {
 
     private String description;
     private Integer capacity;
-
-
-
 }
