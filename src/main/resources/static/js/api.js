@@ -24,8 +24,20 @@ function login() {
       .then(data => data.json())
       .then(data => {
         console.log(data)
+        window.jwtToken = data.accessToken;
+        window.userData = data.userData;
+        if (data.userData.roles.includes("ADMIN")) {
+          window.location.replace("/html/admin.html");
+        } else if (data.userData.roles.includes("FACULTY")) {
+          window.location.replace("/html/faculty.html");
+        } else {
+          window.location.replace("/html/student.html");
+        }
       })
       .catch((err) => {
         console.error(err);
+        window.jwtToken = null;
+        window.userData = null;
+        alert(err);
       })
 }
