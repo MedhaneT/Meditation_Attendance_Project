@@ -4,8 +4,7 @@ package edu.miu.cs544.group1.project.controller;
 import com.google.zxing.ChecksumException;
 import com.google.zxing.FormatException;
 import com.google.zxing.NotFoundException;
-import edu.miu.cs544.group1.project.domain.Location;
-import edu.miu.cs544.group1.project.service.AttendaceRecordService;
+import edu.miu.cs544.group1.project.service.AttendanceRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +15,7 @@ import java.io.IOException;
 public class AttendaceRecordController {
 
     @Autowired
-    private AttendaceRecordService attendaceRecordService;
+    private AttendanceRecordService attendanceRecordService;
 
     @PostMapping("/{barcodeLocation}/{barcodeString}" )
     public void barcodeAttedance(

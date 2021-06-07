@@ -8,7 +8,7 @@ import edu.miu.cs544.group1.project.domain.Location;
 import java.io.IOException;
 
 
-public interface AttendaceRecordService {
+public interface AttendanceRecordService {
 
     String barcodeReader(String barcode) throws ChecksumException, NotFoundException, FormatException, IOException;
 
