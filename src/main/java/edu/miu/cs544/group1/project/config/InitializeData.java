@@ -2,6 +2,7 @@ package edu.miu.cs544.group1.project.config;
 
 import edu.miu.cs544.group1.project.controller.dto.LocationDto;
 import edu.miu.cs544.group1.project.controller.dto.RegisterUserDto;
+import edu.miu.cs544.group1.project.controller.dto.TimeSlotDto;
 import edu.miu.cs544.group1.project.domain.*;
 import edu.miu.cs544.group1.project.domain.enumerated.RoleCode;
 import edu.miu.cs544.group1.project.repository.LocationRepository;
@@ -9,8 +10,10 @@ import edu.miu.cs544.group1.project.repository.RoleRepository;
 import edu.miu.cs544.group1.project.repository.StudentRepository;
 import edu.miu.cs544.group1.project.repository.UserRepository;
 import edu.miu.cs544.group1.project.service.LocationService;
+import edu.miu.cs544.group1.project.service.TimeSlotService;
 import edu.miu.cs544.group1.project.service.UserService;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,12 +21,17 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.time.LocalTime;
+
 @Configuration
 @Log4j2
 public class InitializeData {
+    @Autowired
+    private StudentRepository studentRepository;
     @Bean
     public CommandLineRunner loadData(RoleRepository repository, UserRepository userRepository, UserService userService,
-            PasswordEncoder passwordEncoder, LocationRepository locationRepository, LocationService locationService) {
+                                      PasswordEncoder passwordEncoder, LocationRepository locationRepository, LocationService locationService,
+                                      TimeSlotService timeSlotService) {
         return (args) -> {
             userRepository.deleteAll();
             userRepository.deleteAll();
@@ -130,6 +138,15 @@ public class InitializeData {
             {
                 LocationDto location = new LocationDto(new Location(3, "Argiro", 60));
                 locationService.registerLocation(location);
+            }
+
+            {
+                TimeSlotDto timeSlot = new TimeSlotDto(new TimeSlot(1,"AM", LocalTime.of(10,00),LocalTime.of(12,00),"it could be More than 2 hours"));
+                timeSlotService.registerTimeSlot(timeSlot);
+            }
+            {
+                TimeSlotDto timeSlot = new TimeSlotDto(new TimeSlot(2,"PM", LocalTime.of(01,30),LocalTime.of(3,00),"it could be More than 1:30  hours"));
+                timeSlotService.registerTimeSlot(timeSlot);
             }
 
             log.info("Registered Users:");

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/students")
@@ -23,10 +22,5 @@ public class StudentController {
    @GetMapping
     public List<StudentDto> findAll(){
         return studentService.findAll();
-    }
-
-    @GetMapping("/{id}")
-    public Optional<Student> findById(@PathVariable int id){
-       return studentService.findById(id);
     }
 }
