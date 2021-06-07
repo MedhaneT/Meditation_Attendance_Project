@@ -26,4 +26,6 @@ public class Student extends Person {
         this.studentId = studentId;
         this.barcodeId = barcodeId;
     }
+
+
 }

@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("/courses")
 public class CourseController {
 
-    @Value("${spring.application.name}")
+//    @Value("${spring.application.name}")
     private String applicationName;
 
     @Autowired
@@ -21,8 +21,11 @@ public class CourseController {
 
     @GetMapping
     public List<Course> findAll() {
+
         return repository.findAll();
     }
+
+
 
     @PostMapping
     public Course create(@Valid @RequestBody Course course) {
