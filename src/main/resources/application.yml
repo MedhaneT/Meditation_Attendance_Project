@@ -1,6 +1,8 @@
 server:
   port: 8080
 spring:
+  mvc:
+    static-path-pattern: /static/**
   security:
     user:
       password: 0aa7957e-9ba6-45fd-9f54-bb48782758a7

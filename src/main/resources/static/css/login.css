@@ -1,14 +1,12 @@
-/* .bg{
+/*.bg {*/
 
-    /* background: url( '../images/maharish.png') no-repeat;
-    width: 10%;
-    height: 15vh;
-    background-size: 10%; */
-    
+/*    background: url('../images/maharish.png') no-repeat;*/
+/*    width: 10%;*/
+/*    height: 15vh;*/
+/*    background-size: 10%;*/
+/*}*/
 
-
-
-.form-container{
+.form-container {
     position: absolute;
     top: 25vh;
     background-color: #fff;
@@ -16,6 +14,7 @@
     border-radius: 10px;
     box-shadow: 0px 0px 10px 0px #000;
 }
+
 header {
     display: flex;
     align-items: center;
@@ -24,6 +23,7 @@ header {
     height: 4em;
     width: 100%;
 }
+
 footer {
     display: flex;
     align-items: center;
@@ -33,6 +33,7 @@ footer {
     background-color: #eeeeee;
     width: 100%;
 }
+
 footer div {
     margin-left: 1em;
     margin-right: 1em;

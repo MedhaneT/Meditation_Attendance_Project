@@ -23,6 +23,12 @@ public class AttendanceRecord {
     @JoinColumn
     private ClassSession session;
 
+    public AttendanceRecord(LocalDateTime scanTime, Student student, ClassSession session) {
+        this.scanTime = scanTime;
+        this.student = student;
+        this.session = session;
+    }
+
     public AttendanceRecord() {
         this.scanTime=LocalDateTime.now();
     }
