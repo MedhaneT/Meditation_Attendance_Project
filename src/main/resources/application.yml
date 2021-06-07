@@ -1,6 +1,8 @@
 server:
   port: 8080
 spring:
+  mvc:
+    static-path-pattern: /static/**
   security:
     user:
       password: 0aa7957e-9ba6-45fd-9f54-bb48782758a7
@@ -9,7 +11,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/cs544
     username: root
-    password: rootroot
+    password: 
     driverClassName: com.mysql.cj.jdbc.Driver
   jpa:
     show-sql: true

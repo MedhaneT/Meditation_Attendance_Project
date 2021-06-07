@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface StudentService {
     List<Student> findAll();
+    public void findStudentbyBarcode(String barcode);
 }

@@ -6,6 +6,7 @@ import edu.miu.cs544.group1.project.domain.Role;
 import edu.miu.cs544.group1.project.domain.Student;
 import edu.miu.cs544.group1.project.domain.enumerated.RoleCode;
 import edu.miu.cs544.group1.project.repository.RoleRepository;
+import edu.miu.cs544.group1.project.repository.StudentRepository;
 import edu.miu.cs544.group1.project.repository.UserRepository;
 import edu.miu.cs544.group1.project.service.UserService;
 import lombok.extern.log4j.Log4j2;
@@ -21,7 +22,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class InitializeData {
     @Bean
     public CommandLineRunner loadData(
-            RoleRepository repository, UserRepository userRepository, UserService userService, PasswordEncoder passwordEncoder) {
+            RoleRepository repository, UserRepository userRepository, UserService userService, PasswordEncoder passwordEncoder , StudentRepository studentRepository) {
         return (args) -> {
             userRepository.deleteAll();
             userRepository.deleteAll();
@@ -36,6 +37,12 @@ public class InitializeData {
             log.info("--------------------------------------------------------------");
             for (Role role : repository.findAll()) {
                 log.info(role.toString());
+            }
+            //add test Student for barcode scanning
+            {
+                Student studnet = new Student( "Berhane" , "Teklehaimanot" ,"1" , "/home/berhane/Desktop/barcode.png");
+                studentRepository.save(studnet);
+
             }
 
             // add admin user

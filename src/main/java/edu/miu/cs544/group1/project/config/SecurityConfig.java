@@ -47,7 +47,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/authenticate/*").permitAll()
-                .antMatchers("/h2-console/**").permitAll()
+                .antMatchers("/").permitAll()
+                .antMatchers("/**/*.html").permitAll()
+                .antMatchers("/html/**").permitAll()
+                .antMatchers("/css/**").permitAll()
+                .antMatchers("/js/**").permitAll()
+                .antMatchers("/images/**").permitAll()
                 .anyRequest().authenticated()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
