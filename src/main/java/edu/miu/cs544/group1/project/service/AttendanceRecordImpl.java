@@ -24,8 +24,6 @@ import java.util.List;
 @Transactional
 public class AttendaceRecordImpl implements AttendaceRecordService {
 
-    List<Student> studentList;
-    List<TimeSlot> timeSlotList = new ArrayList<>();
     @Autowired
     StudentRepository studentRepository;
     @Autowired
@@ -49,18 +47,14 @@ public class AttendaceRecordImpl implements AttendaceRecordService {
 
     @Override
     public void saveAttendance(String barcode, Location location) throws ChecksumException, NotFoundException, IOException, FormatException {
-        studentList = studentRepository.findAll();
+        String sourceBarcode = barcodeReader(barcode);
+        Student student = studentRepository.findByBarcodeId(sourceBarcode).orElseThrow(() -> new RuntimeException("Not found by barcodeid"));
 
-        for (Student stud : studentList) {
-
-            if (barcodeReader(barcode) == (barcodeReader(stud.getBarcodeId()))) {
-                TimeSlot timeSlot = new TimeSlot(LocalTime.now(), LocalTime.now().plusHours(2));
-                timeSlotList.add(timeSlot);
-                ClassSession session = new ClassSession(location, timeSlotList);
-                AttendanceRecord attendanceRecord = new AttendanceRecord(LocalDateTime.now(), stud, session);
-                attendaceRecordRepository.save(attendanceRecord);
-            }
-        }
-
+//        ClassSession classSession = classSessionService.findByLocalionAndTimeSlot(
+//                location, timeSlotService.getCurrentTimeSlot());
+//
+//        AttendanceRecord attendanceRecord = new AttendanceRecord(
+//                LocalDateTime.now(), student, classSession);
+//        attendaceRecordRepository.save(attendanceRecord);
     }
 }

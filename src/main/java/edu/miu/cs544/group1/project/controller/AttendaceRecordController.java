@@ -18,10 +18,11 @@ public class AttendaceRecordController {
     @Autowired
     private AttendaceRecordService attendaceRecordService;
 
-    @PostMapping("/{barcode}" )
-    public void barcodeAttedance(@PathVariable String barcode ) throws ChecksumException, NotFoundException, IOException, FormatException {
-        Location location = new Location(1 , "Derare" , 23);
-        attendaceRecordService.saveAttendance(barcode,location);
-        System.out.println("this is controller ");
+    @PostMapping("/{barcodeLocation}/{barcodeString}" )
+    public void barcodeAttedance(
+            @PathVariable(name = "barcodeLocation") String barcodeLocation,
+            @PathVariable(name = "barcodeString") String barcodeString) throws ChecksumException, NotFoundException, IOException, FormatException {
+//        Location location = locationService.findByCode(barcodeLocation);
+//        attendaceRecordService.saveAttendance(barcodeString,location);
     }
 }

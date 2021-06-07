@@ -10,6 +10,7 @@ import java.io.IOException;
 
 public interface AttendaceRecordService {
 
-    public  String barcodeReader(String barcode) throws ChecksumException, NotFoundException, FormatException, IOException;
-    public void saveAttendance(String barcode , Location location) throws ChecksumException, NotFoundException, IOException, FormatException;
+    String barcodeReader(String barcode) throws ChecksumException, NotFoundException, FormatException, IOException;
+
+    void saveAttendance(String barcode, Location location) throws ChecksumException, NotFoundException, IOException, FormatException;
 }
