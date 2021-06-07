@@ -10,9 +10,6 @@ import javax.persistence.Id;
 @Data
 @NoArgsConstructor
 public class Faculty extends Person {
-    @Id
-    private Integer id;
-
     public Faculty(String firstName, String lastName) {
         super(firstName, lastName);
     }

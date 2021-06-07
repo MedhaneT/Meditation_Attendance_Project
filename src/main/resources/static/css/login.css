@@ -1,0 +1,42 @@
+/*.bg {*/
+
+/*    background: url('../images/maharish.png') no-repeat;*/
+/*    width: 10%;*/
+/*    height: 15vh;*/
+/*    background-size: 10%;*/
+/*}*/
+
+.form-container {
+    position: absolute;
+    top: 25vh;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px #000;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    background-color: #4805c5;
+    height: 4em;
+    width: 100%;
+}
+
+footer {
+    display: flex;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    height: 50px;
+    background-color: #eeeeee;
+    width: 100%;
+}
+
+footer div {
+    margin-left: 1em;
+    margin-right: 1em;
+    color: #ababab;
+    width: 100%;
+}

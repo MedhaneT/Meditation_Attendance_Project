@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface StudentService {
-    List<StudentDto> findAll();
-    Optional<Student> findById(int id);
+    List<Student> findAll();
+
+    public void findStudentbyBarcode(String barcode);
 }

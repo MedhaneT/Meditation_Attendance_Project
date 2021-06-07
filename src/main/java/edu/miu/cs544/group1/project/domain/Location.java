@@ -1,5 +1,6 @@
 package edu.miu.cs544.group1.project.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,6 +9,7 @@ import javax.persistence.Id;
 
 @Data
 @Entity
+@AllArgsConstructor
 @NoArgsConstructor
 public class Location {
     @Id
@@ -15,11 +17,4 @@ public class Location {
 
     private String description;
     private Integer capacity;
-
-
-    public Location(Integer id, String description, Integer capacity) {
-        this.id = id;
-        this.description = description;
-        this.capacity = capacity;
-    }
 }

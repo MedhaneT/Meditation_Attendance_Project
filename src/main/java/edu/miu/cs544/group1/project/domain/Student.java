@@ -3,6 +3,7 @@ package edu.miu.cs544.group1.project.domain;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -13,6 +14,7 @@ import java.util.Collection;
 @Entity
 @NoArgsConstructor
 @ToString(exclude = "registrations")
+@Component
 public class Student extends Person {
 
     private String studentId;
