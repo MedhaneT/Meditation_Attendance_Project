@@ -11,6 +11,7 @@ import edu.miu.cs544.group1.project.repository.UserRepository;
 import edu.miu.cs544.group1.project.service.LocationService;
 import edu.miu.cs544.group1.project.service.UserService;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +22,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @Log4j2
 public class InitializeData {
+    @Autowired
+    private StudentRepository studentRepository;
     @Bean
     public CommandLineRunner loadData(RoleRepository repository, UserRepository userRepository, UserService userService,
             PasswordEncoder passwordEncoder, LocationRepository locationRepository, LocationService locationService) {

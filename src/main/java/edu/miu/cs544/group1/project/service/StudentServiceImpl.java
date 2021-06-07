@@ -16,8 +16,6 @@ import java.util.stream.Collectors;
 public class StudentServiceImpl implements StudentService {
     @Autowired
     private StudentRepository repository;
-    @Autowired
-    private Student student;
 
     Student stud = new Student("behane", "Teklehaimanot", "123455", "/home/berhane/Desktop/barcode.png");
 
