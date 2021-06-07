@@ -49,7 +49,8 @@ public class InitializeData {
             {
                 RegisterUserDto userDto = new RegisterUserDto(
                         "admin@miu.edu",
-                        passwordEncoder.encode("123123"),
+                      passwordEncoder.encode("123123"),
+
                         new Faculty("Payman", "Salek"),
                         RoleCode.ADMIN);
                 userService.registerUser(userDto);
@@ -60,8 +61,9 @@ public class InitializeData {
                 RegisterUserDto userDto = new RegisterUserDto(
                         "tuannx87@gmail.com",
                         passwordEncoder.encode("123123"),
+
                         new Student("Xuan Tuan", "Nguyen", "000-666999", "000-666999"),
-                        RoleCode.ADMIN);
+                        RoleCode.STUDENT);
                 userService.registerUser(userDto);
             }
 

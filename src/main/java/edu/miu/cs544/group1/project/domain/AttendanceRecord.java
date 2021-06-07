@@ -10,6 +10,7 @@ import java.time.LocalTime;
 @Data
 public class AttendanceRecord {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(nullable = false)
     private LocalDateTime scanTime;
@@ -22,7 +23,7 @@ public class AttendanceRecord {
     @JoinColumn
     private ClassSession session;
 
-    public AttendanceRecord(LocalTime now, Student stud, ClassSession session) {
-
+    public AttendanceRecord() {
+        this.scanTime=LocalDateTime.now();
     }
 }

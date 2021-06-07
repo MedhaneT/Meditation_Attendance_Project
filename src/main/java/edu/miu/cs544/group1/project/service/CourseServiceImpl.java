@@ -12,10 +12,39 @@ import java.util.List;
 @Transactional
 public class CourseServiceImpl implements CourseService {
     @Autowired
-    private CourseRepository repository;
+    private CourseRepository courseRepository;
 
     @Override
     public List<Course> findAll() {
-        return repository.findAll();
+        return courseRepository.findAll();
     }
+
+    @Override
+    public Optional<Course> findById(Long id) {
+        return courseRepository.findById(id);
+    }
+
+    @Override
+    public Optional<Course> findByCode(String code) {
+        return courseRepository.findByCode(code);
+    }
+
+    @Override
+    public void createCource(Course course) {
+        courseRepository.save(course);
+    }
+
+    @Override
+    public void removeCource(Long id) {
+        courseRepository.deleteById(id);
+    }
+    
+    
+//     @Autowired
+//     private CourseRepository repository;
+
+//     @Override
+//     public List<Course> findAll() {
+//         return repository.findAll();
+//     }
 }
