@@ -4,9 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6046b9f3-920c-440f-83f6-aca09c1de3a6" name="Default Changelist" comment="">
+    <list default="true" id="6046b9f3-920c-440f-83f6-aca09c1de3a6" name="Default Changelist" comment="added Student and Location Data">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/miu/cs544/group1/project/config/InitializeData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/miu/cs544/group1/project/config/InitializeData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/miu/cs544/group1/project/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/miu/cs544/group1/project/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/miu/cs544/group1/project/config/SimpleCorsFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/miu/cs544/group1/project/config/SimpleCorsFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/miu/cs544/group1/project/domain/Location.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/miu/cs544/group1/project/domain/Location.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/miu/cs544/group1/project/repository/StudentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/miu/cs544/group1/project/repository/StudentRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/miu/cs544/group1/project/security/JwtRequestFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/miu/cs544/group1/project/security/JwtRequestFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/miu/cs544/group1/project/service/StudentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/miu/cs544/group1/project/service/StudentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/miu/cs544/group1/project/service/StudentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/miu/cs544/group1/project/service/StudentServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/edu/miu/cs544/group1/project/config/InitializeData.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/miu/cs544/group1/project/config/InitializeData.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/edu/miu/cs544/group1/project/config/SimpleCorsFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/miu/cs544/group1/project/config/SimpleCorsFilter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/edu/miu/cs544/group1/project/controller/StudentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/miu/cs544/group1/project/controller/StudentController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/edu/miu/cs544/group1/project/domain/Location.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/miu/cs544/group1/project/domain/Location.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/edu/miu/cs544/group1/project/repository/StudentRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/miu/cs544/group1/project/repository/StudentRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/edu/miu/cs544/group1/project/service/StudentService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/miu/cs544/group1/project/service/StudentService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/edu/miu/cs544/group1/project/service/StudentServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/miu/cs544/group1/project/service/StudentServiceImpl.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +33,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -47,7 +62,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../EA_Salek_2021/copy_project - Copy/Project_Meditation_Attendance/Meditation_Attendance_Project" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -56,6 +71,19 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
   </component>
   <component name="RunManager">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ProjectApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="project" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="edu.miu.cs544.group1.project.ProjectApplication" />
@@ -73,7 +101,17 @@
       <option name="presentableId" value="Default" />
       <updated>1622992699002</updated>
       <workItem from="1622992701058" duration="4112000" />
+      <workItem from="1623007909570" duration="14966000" />
+      <workItem from="1623075607140" duration="1391000" />
     </task>
+    <task id="LOCAL-00001" summary="updated">
+      <created>1623005940875</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1623005940875</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -90,5 +128,10 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="updated" />
+    <MESSAGE value="added Student and Location Data" />
+    <option name="LAST_COMMIT_MESSAGE" value="added Student and Location Data" />
   </component>
 </project>

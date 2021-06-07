@@ -30,6 +30,7 @@ public class SimpleCorsFilter implements Filter {
             response.setStatus(HttpServletResponse.SC_OK);
         } else {
             chain.doFilter(req, res);
+
         }
     }
 
