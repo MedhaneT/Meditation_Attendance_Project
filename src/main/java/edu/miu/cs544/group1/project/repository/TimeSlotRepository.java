@@ -7,5 +7,5 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Transactional
-public interface TimeSlotRepository extends JpaRepository<TimeSlot,Integer> {
+public interface TimeSlotRepository extends JpaRepository<TimeSlot,String> {
 }

@@ -141,11 +141,11 @@ public class InitializeData {
             }
 
             {
-                TimeSlotDto timeSlot = new TimeSlotDto(new TimeSlot(1,"AM", LocalTime.of(10,00),LocalTime.of(12,00),"it could be More than 2 hours"));
+                TimeSlotDto timeSlot = new TimeSlotDto(new TimeSlot("AM", LocalTime.of(10,00),LocalTime.of(12,00),"it could be More than 2 hours"));
                 timeSlotService.registerTimeSlot(timeSlot);
             }
             {
-                TimeSlotDto timeSlot = new TimeSlotDto(new TimeSlot(2,"PM", LocalTime.of(01,30),LocalTime.of(3,00),"it could be More than 1:30  hours"));
+                TimeSlotDto timeSlot = new TimeSlotDto(new TimeSlot("PM", LocalTime.of(01,30),LocalTime.of(3,00),"it could be More than 1:30  hours"));
                 timeSlotService.registerTimeSlot(timeSlot);
             }
 

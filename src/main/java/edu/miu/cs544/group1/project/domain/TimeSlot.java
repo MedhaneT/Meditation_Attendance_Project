@@ -16,7 +16,7 @@ import java.time.LocalTime;
 @NoArgsConstructor
 public class TimeSlot {
     @Id
-    private Integer id;
+  //  private Integer id;
     @Column(length = 2, nullable = false)
     private String abbreviation; // AM, PM
     @Column(nullable = false)

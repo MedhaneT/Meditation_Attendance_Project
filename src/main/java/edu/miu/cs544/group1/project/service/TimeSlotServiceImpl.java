@@ -25,7 +25,7 @@ public class TimeSlotServiceImpl implements  TimeSlotService{
     @Override
     public TimeSlot registerTimeSlot(TimeSlotDto timeSlotDto) {
         TimeSlot timeSlot = new TimeSlot();
-        timeSlot.setId(timeSlotDto.getId());
+       // timeSlot.setId(timeSlotDto.getId());
         timeSlot.setAbbreviation(timeSlotDto.getAbbreviation());
         timeSlot.setStartTime(timeSlotDto.getStartTime());
         timeSlot.setEndTime(timeSlotDto.getEndTime());
