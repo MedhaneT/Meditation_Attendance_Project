@@ -5,34 +5,55 @@ import edu.miu.cs544.group1.project.domain.TimeSlot;
 import edu.miu.cs544.group1.project.repository.TimeSlotRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Service
-@Transactional
-public class TimeSlotServiceImpl implements  TimeSlotService{
+public class TimeSlotServiceImpl implements TimeSlotService {
 
     @Autowired
-    private TimeSlotRepository timeSlotRepository;
+    TimeSlotRepository timeSlotRepository;
 
     @Override
-    public List<TimeSlotDto> findAll() {
-        return timeSlotRepository.findAll().stream().map(t->new TimeSlotDto(t)).collect(Collectors.toList());
+    public List<TimeSlot> findAll() {
+        return timeSlotRepository.findAll();
     }
 
     @Override
-    public TimeSlot registerTimeSlot(TimeSlotDto timeSlotDto) {
+    public Optional<TimeSlot> findTimeSlotById(Long id) {
+
+        return timeSlotRepository.findById(id);
+    }
+
+    @Override
+    public Optional<TimeSlot> findTimeSlotByAbbreviation(String abbreviation) {
+        return timeSlotRepository.findByAbbreviation(abbreviation);
+    }
+
+    @Override
+    public void createTimeSlot(TimeSlotDto timeSlotDto) {
         TimeSlot timeSlot = new TimeSlot();
-       // timeSlot.setId(timeSlotDto.getId());
         timeSlot.setAbbreviation(timeSlotDto.getAbbreviation());
-        timeSlot.setStartTime(timeSlotDto.getStartTime());
-        timeSlot.setEndTime(timeSlotDto.getEndTime());
         timeSlot.setDescription(timeSlotDto.getDescription());
+        //10:15
+//        String startTime = timeSlotDto.getStartTime();
+//        int sHour = Integer.parseInt(startTime.substring(0, 2));
+//        int sMinute = Integer.parseInt(startTime.substring(3));
+        timeSlot.setStartTime(timeSlotDto.getStartTime());
+//
+//        String endTime = timeSlotDto.getEndTime();
+//        int eHour = Integer.parseInt(endTime.substring(0, 2));
+//        int eMinute = Integer.parseInt(endTime.substring(3));
+        timeSlot.setEndTime(timeSlotDto.getEndTime());
 
-        timeSlot = timeSlotRepository.save(timeSlot);
+        timeSlotRepository.save(timeSlot);
 
-        return timeSlot;
+
+    }
+
+    @Override
+    public void removeTimeSlot(Long id) {
+        timeSlotRepository.deleteById(id);
     }
 }

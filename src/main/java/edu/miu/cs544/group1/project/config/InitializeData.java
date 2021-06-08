@@ -28,6 +28,7 @@ import java.time.LocalTime;
 public class InitializeData {
     @Autowired
     private StudentRepository studentRepository;
+
     @Bean
     public CommandLineRunner loadData(RoleRepository repository, UserRepository userRepository, UserService userService,
                                       PasswordEncoder passwordEncoder, LocationRepository locationRepository, LocationService locationService,
@@ -126,27 +127,25 @@ public class InitializeData {
             }
 
             {
-                LocationDto location = new LocationDto(new Location(1, "VaryHoll", 50)
-
-                );
-                locationService.registerLocation(location);
+                LocationDto location = new LocationDto(new Location(1, "VaryHoll", "VaryHoll", 50));
+                locationService.createLocation(location);
             }
             {
-                LocationDto location = new LocationDto(new Location(2, "Mclaughlin", 45));
-                locationService.registerLocation(location);
+                LocationDto location = new LocationDto(new Location(2, "Mclaughlin", "Mclaughlin", 45));
+                locationService.createLocation(location);
             }
             {
-                LocationDto location = new LocationDto(new Location(3, "Argiro", 60));
-                locationService.registerLocation(location);
+                LocationDto location = new LocationDto(new Location(3, "Argiro", "Argiro", 60));
+                locationService.createLocation(location);
             }
 
             {
-                TimeSlotDto timeSlot = new TimeSlotDto(new TimeSlot("AM", LocalTime.of(10,00),LocalTime.of(12,00),"it could be More than 2 hours"));
-                timeSlotService.registerTimeSlot(timeSlot);
+                TimeSlotDto timeSlot = new TimeSlotDto(new TimeSlot("AM", LocalTime.of(10, 00), LocalTime.of(12, 00), "it could be More than 2 hours"));
+                timeSlotService.createTimeSlot(timeSlot);
             }
             {
-                TimeSlotDto timeSlot = new TimeSlotDto(new TimeSlot("PM", LocalTime.of(01,30),LocalTime.of(3,00),"it could be More than 1:30  hours"));
-                timeSlotService.registerTimeSlot(timeSlot);
+                TimeSlotDto timeSlot = new TimeSlotDto(new TimeSlot("PM", LocalTime.of(01, 30), LocalTime.of(3, 00), "it could be More than 1:30  hours"));
+                timeSlotService.createTimeSlot(timeSlot);
             }
 
             log.info("Registered Users:");

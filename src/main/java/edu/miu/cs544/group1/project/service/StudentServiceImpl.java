@@ -9,30 +9,41 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
 public class StudentServiceImpl implements StudentService {
     @Autowired
-    private StudentRepository repository;
+    private StudentRepository studentRepository;
 
-    Student stud = new Student("behane", "Teklehaimanot", "123455", "/home/berhane/Desktop/barcode.png");
 
     @Override
-    public List<StudentDto> findAll() {
-        return repository.findAll().stream().map(student -> new StudentDto(student)).collect(Collectors.toList());
+    public List<Student> findAll() {
+        return studentRepository.findAll();
     }
 
     @Override
-    public void findStudentbyBarcode(String barcode) {
-
-        if (barcode == stud.getBarcodeId())
-            ;
-        System.out.println("present");
-
-        System.out.println("absent");
-
+    public Optional<Student> findStudentById(String sId) {
+        return studentRepository.findByStudentId(sId);
     }
 
+    @Override
+    public Optional<Student> findStudentByBarcodeId(String bId) {
+        return studentRepository.findByBarcodeId(bId);
+    }
+
+    @Override
+    public void createStudent(StudentDto studentDto) {
+        Student student = new Student();
+        student.setFirstName(studentDto.getFirstName());
+        student.setLastName(studentDto.getLastName());
+        student.setBarcodeId(studentDto.getBarcodeId());
+        student.setStudentId(studentDto.getStudentId());
+        studentRepository.save(student);
+    }
+
+    @Override
+    public void removeStudent(Long id) {
+        studentRepository.deleteById(id);
+    }
 }

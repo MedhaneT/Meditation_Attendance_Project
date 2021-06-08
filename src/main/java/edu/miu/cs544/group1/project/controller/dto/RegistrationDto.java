@@ -1,24 +1,22 @@
 package edu.miu.cs544.group1.project.controller.dto;
 
-import edu.miu.cs544.group1.project.domain.CourseOffering;
-import edu.miu.cs544.group1.project.domain.Registration;
-import edu.miu.cs544.group1.project.domain.Student;
-import lombok.Getter;
+import lombok.Data;
+import lombok.Value;
 
 import java.time.LocalDateTime;
 
-@Getter
+@Data
+@Value
 public class RegistrationDto {
-
-    private Long id;
+    private String rid;
     private LocalDateTime registrationTime;
-    private Student student;
-    private CourseOffering courseOffering;
+    private String studentId;
+    private Long courseOfferingId;
 
-    public RegistrationDto(Registration registration){
-        this.id = registration.getId();
-        this.registrationTime = registration.getRegistrationTime();
-        this.student = registration.getStudent();
-        this.courseOffering = registration.getCourseOffering();
+    public RegistrationDto(String rid, String studentId, Long courseOfferingId) {
+        this.rid = rid;
+        this.studentId = studentId;
+        this.courseOfferingId = courseOfferingId;
+        this.registrationTime = LocalDateTime.now();
     }
 }

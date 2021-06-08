@@ -10,6 +10,6 @@ import java.util.Optional;
 @Repository
 @Transactional
 public interface StudentRepository extends JpaRepository<Student, Long> {
-
-    Optional<Student> findByBarcodeId(String sourceBarcode);
+    Optional<Student> findByStudentId(String sId);
+    Optional<Student> findByBarcodeId(String bId);
 }

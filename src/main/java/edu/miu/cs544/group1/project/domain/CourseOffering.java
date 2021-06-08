@@ -1,5 +1,6 @@
 package edu.miu.cs544.group1.project.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,20 +13,36 @@ import java.util.List;
 @NoArgsConstructor
 public class CourseOffering {
     @Id
-    private Integer id;
+    @GeneratedValue
+    private Long id;
     private LocalDate startDate;
     private LocalDate endDate;
 
     @ManyToOne
     @JoinColumn
+    @JsonIgnoreProperties(value = {"courseOfferings"}, allowSetters = true)
     private Course course;
 
     @ManyToOne
     @JoinColumn
+    @JsonIgnoreProperties(value = {"user"}, allowSetters = true)
     private Faculty faculty;
 
     @OneToMany(mappedBy = "courseOffering")
+    @JsonIgnoreProperties(value = {"courseOffering"}, allowSetters = true)
     private List<Registration> registrations;
     @OneToMany(mappedBy = "courseOffering")
+    @JsonIgnoreProperties(value = {"courseOffering"}, allowSetters = true)
     private List<ClassSession> sessions;
+
+    public void addRegistration(Registration registration) {
+        registration.setCourseOffering(this);
+        registrations.add(registration);
+    }
+
+    public void addClassSession(ClassSession classSession) {
+        classSession.setCourseOffering(this);
+        sessions.add(classSession);
+
+    }
 }
