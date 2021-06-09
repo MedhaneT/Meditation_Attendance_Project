@@ -13,9 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AttendanceRecordService {
-    void saveAttendance(String barcode, Location location) throws ChecksumException, IOException, FormatException, NotFoundException;
-
-    String barcodeReader(String barcode) throws ChecksumException, FormatException, IOException, NotFoundException;
+    void saveAttendance(String barcode, Location location);
 
     void createAttendanceRecord(AttendanceRecordDto attendanceRecordDto);
 

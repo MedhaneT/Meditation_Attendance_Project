@@ -41,25 +41,24 @@ public class AttendanceRecordServiceImpl implements AttendanceRecordService {
     @Autowired
     private TimeSlotService timeSlotService;
 
+ //   @Override
+//    public String barcodeReader(String barcode) throws ChecksumException, NotFoundException, FormatException, IOException {
+//
+//        InputStream barCodeInputStream = new FileInputStream(barcode);
+//        BufferedImage barCodeBufferedImage = ImageIO.read(barCodeInputStream);
+//
+//        LuminanceSource source = new BufferedImageLuminanceSource(barCodeBufferedImage);
+//        BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
+//        Reader reader = new MultiFormatReader();
+//        Result result = reader.decode(bitmap);
+//
+//        return result.getText();
+//
+//    }
+
     @Override
-    public String barcodeReader(String barcode) throws ChecksumException, NotFoundException, FormatException, IOException {
-
-        InputStream barCodeInputStream = new FileInputStream(barcode);
-        BufferedImage barCodeBufferedImage = ImageIO.read(barCodeInputStream);
-
-        LuminanceSource source = new BufferedImageLuminanceSource(barCodeBufferedImage);
-        BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
-        Reader reader = new MultiFormatReader();
-        Result result = reader.decode(bitmap);
-
-        return result.getText();
-
-    }
-
-    @Override
-    public void saveAttendance(String barcode, Location location) throws ChecksumException, NotFoundException, IOException, FormatException {
-        String sourceBarcode = barcodeReader(barcode);
-        Student student = studentRepository.findByBarcodeId(sourceBarcode).orElseThrow(() -> new RuntimeException("Not found by barcodeid"));
+    public void saveAttendance(String barcode, Location location) {
+        Student student = studentRepository.findByBarcodeId(barcode).orElseThrow(() -> new RuntimeException("Not found by barcodeid"));
 
         ClassSession classSession = classSessionService.findByLocationAndTimeSlot(
                 location, timeSlotService.getTimeSlot(LocalTime.now()).get()).get();

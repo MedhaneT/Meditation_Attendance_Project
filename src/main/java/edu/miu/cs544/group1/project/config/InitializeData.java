@@ -126,7 +126,7 @@ public class InitializeData {
 
             {
                 RegisterUserDto userDto = new RegisterUserDto("medhane@gmail.com", passwordEncoder.encode("123123"),
-                        new Student("Medhane", "TS", "11111", "000-111222"), RoleCode.STUDENT);
+                        new Student("Medhane", "TS", "11111", "src/main/resources/barcodeImages/barcode.jpg"), RoleCode.STUDENT);
                 userService.registerUser(userDto);
             }
             {
@@ -258,11 +258,11 @@ public class InitializeData {
 
             //Time slots
             {
-                TimeSlot timeSlot = new TimeSlot("AM", LocalTime.of(10, 00), LocalTime.of(12, 00), "it could be More than 2 hours");
+                TimeSlot timeSlot = new TimeSlot("AM", LocalTime.of(10, 00), LocalTime.of(12, 30), "it could be More than 2 hours");
                 timeSlotRepository.save(timeSlot);
             }
             {
-                TimeSlot timeSlot = new TimeSlot("PM", LocalTime.of(01, 30), LocalTime.of(3, 00), "it could be More than 1:30  hours");
+                TimeSlot timeSlot = new TimeSlot("PM", LocalTime.of(13, 30), LocalTime.of(15, 00), "it could be More than 1:30  hours");
                 timeSlotRepository.save(timeSlot);
             }
 
