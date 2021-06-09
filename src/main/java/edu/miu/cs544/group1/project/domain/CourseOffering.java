@@ -43,6 +43,15 @@ public class CourseOffering {
     public void addClassSession(ClassSession classSession) {
         classSession.setCourseOffering(this);
         sessions.add(classSession);
+    }
 
+    @Override
+    public String toString() {
+        return "CourseOffering{" +
+                "startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", course=" + course +
+                ", faculty=" + faculty +
+                '}';
     }
 }
