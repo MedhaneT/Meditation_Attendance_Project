@@ -2,13 +2,9 @@ package edu.miu.cs544.group1.project.config;
 
 import edu.miu.cs544.group1.project.controller.dto.LocationDto;
 import edu.miu.cs544.group1.project.controller.dto.RegisterUserDto;
-import edu.miu.cs544.group1.project.controller.dto.TimeSlotDto;
 import edu.miu.cs544.group1.project.domain.*;
 import edu.miu.cs544.group1.project.domain.enumerated.RoleCode;
-import edu.miu.cs544.group1.project.repository.LocationRepository;
-import edu.miu.cs544.group1.project.repository.RoleRepository;
-import edu.miu.cs544.group1.project.repository.StudentRepository;
-import edu.miu.cs544.group1.project.repository.UserRepository;
+import edu.miu.cs544.group1.project.repository.*;
 import edu.miu.cs544.group1.project.service.LocationService;
 import edu.miu.cs544.group1.project.service.TimeSlotService;
 import edu.miu.cs544.group1.project.service.UserService;
@@ -20,7 +16,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Configuration
@@ -28,6 +26,15 @@ import java.time.LocalTime;
 public class InitializeData {
     @Autowired
     private StudentRepository studentRepository;
+    @Autowired
+    private CourseRepository courseRepository;
+    @Autowired
+    private CourseOfferingRepository courseOfferingRepository;
+    @Autowired
+    private ClassSessionRepository classSessionRepository;
+
+    @Autowired
+    private TimeSlotRepository timeSlotRepository;
 
     @Bean
     public CommandLineRunner loadData(RoleRepository repository, UserRepository userRepository, UserService userService,
@@ -61,6 +68,25 @@ public class InitializeData {
                         new Faculty("Payman", "Salek"), RoleCode.ADMIN);
                 userService.registerUser(userDto);
             }
+
+            {
+                RegisterUserDto userDto = new RegisterUserDto("asander@miu.edu", passwordEncoder.encode("123123"),
+                        new Faculty("Anthony", "Sander"), RoleCode.ADMIN);
+                userService.registerUser(userDto);
+            }
+
+            {
+                RegisterUserDto userDto = new RegisterUserDto("najeeb@miu.edu", passwordEncoder.encode("123123"),
+                        new Faculty("Najeeb", "Najeeb"), RoleCode.ADMIN);
+                userService.registerUser(userDto);
+            }
+
+            {
+                RegisterUserDto userDto = new RegisterUserDto("rjong@miu.edu", passwordEncoder.encode("123123"),
+                        new Faculty("Ren de", "Jong"), RoleCode.ADMIN);
+                userService.registerUser(userDto);
+            }
+
 
             // add student user
             {
@@ -126,6 +152,8 @@ public class InitializeData {
                 userService.registerUser(userDto);
             }
 
+
+            //Locations
             {
                 LocationDto location = new LocationDto(new Location(1, "VaryHoll", "VaryHoll", 50));
                 locationService.createLocation(location);
@@ -139,14 +167,86 @@ public class InitializeData {
                 locationService.createLocation(location);
             }
 
+
+            // Misghinna's Damy data
+
+            //courses
             {
-                TimeSlotDto timeSlot = new TimeSlotDto(new TimeSlot("AM", LocalTime.of(10, 00), LocalTime.of(12, 00), "it could be More than 2 hours"));
-                timeSlotService.createTimeSlot(timeSlot);
+                Course course = new Course("CS472", "WAP", "Web Application Programming");
+                CourseOffering courseOffering = new CourseOffering();
+                courseOffering.setStartDate(LocalDate.of(2021, 6, 21));
+                courseOffering.setEndDate(LocalDate.of(2021, 7, 21));
+                courseOffering.setFaculty((Faculty) userRepository.findByEmail("admin@miu.edu").get().getPerson());
+                course.addCourseOffering(courseOffering);
+                courseRepository.save(course);
+            }
+
+            {
+                Course course = new Course("CS544", "EA", "Enterprise Architecture");
+                CourseOffering courseOffering = new CourseOffering();
+                courseOffering.setStartDate(LocalDate.of(2021, 7, 25));
+                courseOffering.setEndDate(LocalDate.of(2021, 8, 25));
+                courseOffering.setFaculty((Faculty) userRepository.findByEmail("rjong@miu.edu").get().getPerson());
+                course.addCourseOffering(courseOffering);
+                courseRepository.save(course);
+            }
+
+
+            {
+                Course course = new Course("CS72", "MWA", "Modern Web Application");
+                CourseOffering courseOffering = new CourseOffering();
+                courseOffering.setStartDate(LocalDate.of(2021, 7, 25));
+                courseOffering.setEndDate(LocalDate.of(2021, 8, 25));
+                courseOffering.setFaculty((Faculty) userRepository.findByEmail("najeeb@miu.edu").get().getPerson());
+                course.addCourseOffering(courseOffering);
+                courseRepository.save(course);
+            }
+
+            {
+                Course course = new Course("CS582", "ML", "Enterprise Architecture");
+                CourseOffering courseOffering = new CourseOffering();
+                courseOffering.setStartDate(LocalDate.of(2021, 7, 25));
+                courseOffering.setEndDate(LocalDate.of(2021, 8, 25));
+                courseOffering.setFaculty((Faculty) userRepository.findByEmail("asander@miu.edu").get().getPerson());
+                course.addCourseOffering(courseOffering);
+                courseRepository.save(course);
+            }
+
+
+            {
+                Course course = new Course("CS525", "ASD", "Advanced Software Development");
+                CourseOffering courseOffering = new CourseOffering();
+                courseOffering.setStartDate(LocalDate.of(2021, 7, 25));
+                courseOffering.setEndDate(LocalDate.of(2021, 8, 25));
+                courseOffering.setFaculty((Faculty) userRepository.findByEmail("admin@miu.edu").get().getPerson());
+                course.addCourseOffering(courseOffering);
+                courseRepository.save(course);
+            }
+
+
+            //Time slots
+            {
+                TimeSlot timeSlot = new TimeSlot("AM", LocalTime.of(10, 00), LocalTime.of(12, 00), "it could be More than 2 hours");
+                timeSlotRepository.save(timeSlot);
             }
             {
-                TimeSlotDto timeSlot = new TimeSlotDto(new TimeSlot("PM", LocalTime.of(01, 30), LocalTime.of(3, 00), "it could be More than 1:30  hours"));
-                timeSlotService.createTimeSlot(timeSlot);
+                TimeSlot timeSlot = new TimeSlot("PM", LocalTime.of(01, 30), LocalTime.of(3, 00), "it could be More than 1:30  hours");
+                timeSlotRepository.save(timeSlot);
             }
+
+            {
+                CourseOffering courseOffering = courseRepository.findByCode("CS72").get().getCourseOfferings().get(0);
+                for (int i = 0; i < 20; i++) {
+                    ClassSession classSession = new ClassSession();
+                    classSession.setLocation(locationRepository.findByName("Mclaughlin").get());
+                    classSession.setStartDate(courseOffering.getStartDate().plusDays(i));
+                    classSession.setCourseOffering(courseOffering);
+                    classSession.addTimeSlot(timeSlotRepository.findByAbbreviation("AM").get());
+                    classSessionRepository.save(classSession);
+                }
+            }
+            //course offerings
+
 
             log.info("Registered Users:");
             log.info("--------------------------------------------------------------");
