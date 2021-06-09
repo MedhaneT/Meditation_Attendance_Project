@@ -1,7 +1,9 @@
 package edu.miu.cs544.group1.project.controller;
 
+import edu.miu.cs544.group1.project.controller.dto.CourseDto;
 import edu.miu.cs544.group1.project.domain.Course;
 import edu.miu.cs544.group1.project.repository.CourseRepository;
+import edu.miu.cs544.group1.project.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -17,24 +19,22 @@ public class CourseController {
     private String applicationName;
 
     @Autowired
-    private CourseRepository repository;
+    private CourseService courseService;
 
     @GetMapping
     public List<Course> findAll() {
 
-        return repository.findAll();
+        return courseService.findAll();
     }
 
 
 
     @PostMapping
-    public Course create(@Valid @RequestBody Course course) {
-        repository.findByCode(course.getCode()).ifPresent((v) -> {
-            throw new RuntimeException();
-        });
-        return repository.save(course);
+    public void create(@Valid @RequestBody CourseDto courseDto) {
+           courseService.findByCode(courseDto.getCode()).ifPresent((v)->{
+               throw new RuntimeException();
+           });
+
+        courseService.createCource(courseDto);
     }
-
-
-
 }

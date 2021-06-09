@@ -12,7 +12,7 @@ import javax.persistence.*;
 public abstract class Person {
     @Id
     @GeneratedValue
-    private Integer id;
+    private Long id;
     private String firstName;
     private String lastName;
 

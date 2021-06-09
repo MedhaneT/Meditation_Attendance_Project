@@ -1,12 +1,10 @@
 package edu.miu.cs544.group1.project.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -14,15 +12,18 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class Registration {
     @Id
+    @GeneratedValue
     private Long id;
 
     private LocalDateTime registrationTime;
 
     @ManyToOne
     @JoinColumn
+    @JsonIgnoreProperties(value = {"user", "registrations"}, allowSetters = true)
     private Student student;
 
     @ManyToOne
     @JoinColumn
+    @JsonIgnoreProperties(value = {"sessions", "faculty", "registrations"}, allowSetters = true)
     private CourseOffering courseOffering;
 }

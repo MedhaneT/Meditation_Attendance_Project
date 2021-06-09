@@ -4,23 +4,31 @@ import edu.miu.cs544.group1.project.controller.dto.StudentDto;
 import edu.miu.cs544.group1.project.domain.Student;
 import edu.miu.cs544.group1.project.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
 @RequestMapping("/students")
 public class StudentController {
 
-
     @Autowired
-    private StudentService studentService;
+    StudentService studentService;
 
-   @GetMapping
-    public List<StudentDto> findAll(){
+    @GetMapping
+    public List<Student> findAll() {
+
         return studentService.findAll();
+    }
+
+
+    @PostMapping
+    public void create(@Valid @RequestBody StudentDto studentDto) {
+        studentService.findStudentById(studentDto.getStudentId()).ifPresent((v) -> {
+            throw new RuntimeException();
+        });
+
+        studentService.createStudent(studentDto);
     }
 }
