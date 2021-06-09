@@ -18,6 +18,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -33,6 +34,12 @@ public class AttendanceRecordServiceImpl implements AttendanceRecordService {
 
     @Autowired
     ClassSessionRepository classSessionRepository;
+
+    @Autowired
+    private ClassSessionService classSessionService;
+
+    @Autowired
+    private TimeSlotService timeSlotService;
 
     @Override
     public String barcodeReader(String barcode) throws ChecksumException, NotFoundException, FormatException, IOException {
@@ -54,12 +61,12 @@ public class AttendanceRecordServiceImpl implements AttendanceRecordService {
         String sourceBarcode = barcodeReader(barcode);
         Student student = studentRepository.findByBarcodeId(sourceBarcode).orElseThrow(() -> new RuntimeException("Not found by barcodeid"));
 
-//        ClassSession classSession = classSessionService.findByLocalionAndTimeSlot(
-//                location, timeSlotService.getCurrentTimeSlot());
-//
-//        AttendanceRecord attendanceRecord = new AttendanceRecord(
-//                LocalDateTime.now(), student, classSession);
-//        attendaceRecordRepository.save(attendanceRecord);
+        ClassSession classSession = classSessionService.findByLocationAndTimeSlot(
+                location, timeSlotService.getTimeSlot(LocalTime.now()).get()).get();
+
+        AttendanceRecord attendanceRecord = new AttendanceRecord(
+                LocalDateTime.now(), student, classSession);
+        attendanceRecordRepository.save(attendanceRecord);
     }
 
     @Override

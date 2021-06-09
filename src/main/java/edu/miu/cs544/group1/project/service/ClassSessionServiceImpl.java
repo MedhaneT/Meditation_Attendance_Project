@@ -73,4 +73,9 @@ public class ClassSessionServiceImpl implements ClassSessionService {
     public void removeClassSession(Long id) {
         classSessionRepository.deleteById(id);
     }
+
+    @Override
+    public Optional<ClassSession> findByLocationAndTimeSlot(Location location, TimeSlot timeSlot) {
+        return classSessionRepository.findTodayClassSessionByLocationAndTimeSlot(location, timeSlot);
+    }
 }

@@ -12,10 +12,11 @@ public class User {
     @GeneratedValue
     private Integer id;
 
+    @Column(unique = true)
     private String email;
     private String password;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Person person;
 
     @ManyToMany(fetch = FetchType.EAGER)

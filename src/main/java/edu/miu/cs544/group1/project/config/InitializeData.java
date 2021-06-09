@@ -6,7 +6,6 @@ import edu.miu.cs544.group1.project.domain.*;
 import edu.miu.cs544.group1.project.domain.enumerated.RoleCode;
 import edu.miu.cs544.group1.project.repository.*;
 import edu.miu.cs544.group1.project.service.LocationService;
-import edu.miu.cs544.group1.project.service.TimeSlotService;
 import edu.miu.cs544.group1.project.service.UserService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -37,72 +35,94 @@ public class InitializeData {
     @Autowired
     private TimeSlotRepository timeSlotRepository;
 
-
     @Autowired
     private RegistrationRepository registrationRepository;
+
+    @Autowired
+    private FacultyRepository facultyRepository;
 
     @Autowired
     private AttendanceRecordRepository attendanceRepository;
 
     @Bean
-    public CommandLineRunner loadData(RoleRepository repository, UserRepository userRepository, UserService userService,
-                                      PasswordEncoder passwordEncoder, LocationRepository locationRepository, LocationService locationService,
-                                      TimeSlotService timeSlotService) {
+    public CommandLineRunner loadData(RoleRepository roleRepository,
+                                      UserRepository userRepository,
+                                      UserService userService,
+                                      PasswordEncoder passwordEncoder,
+                                      LocationRepository locationRepository,
+                                      LocationService locationService) {
         return (args) -> {
+            attendanceRepository.deleteAll();
+            classSessionRepository.deleteAll();
+            registrationRepository.deleteAll();
+            courseOfferingRepository.deleteAll();
+            courseRepository.deleteAll();
+            facultyRepository.deleteAll();
+            locationRepository.deleteAll();
+            timeSlotRepository.deleteAll();
             userRepository.deleteAll();
-            userRepository.deleteAll();
-            repository.deleteAll();
+            studentRepository.deleteAll();
+            roleRepository.deleteAll();
 
             // save roles
-            repository.save(new Role(RoleCode.ADMIN));
-            repository.save(new Role(RoleCode.STUDENT));
+            roleRepository.save(new Role(RoleCode.ADMIN));
+            roleRepository.save(new Role(RoleCode.FACULTY));
+            roleRepository.save(new Role(RoleCode.STUDENT));
 
             // fetch all roles
             log.info("Roles found with findAll():");
             log.info("--------------------------------------------------------------");
-            for (Role role : repository.findAll()) {
+            for (Role role : roleRepository.findAll()) {
                 log.info(role.toString());
             }
             // add test Student for barcode scanning
             {
                 Student studnet = new Student("Berhane", "Teklehaimanot", "1", "/home/berhane/Desktop/barcode.png");
                 studentRepository.save(studnet);
-
             }
 
             // add admin user
+            User admin = null;
+            User faculty = null;
+            User student = null;
             {
-                RegisterUserDto userDto = new RegisterUserDto("admin@miu.edu", passwordEncoder.encode("123123"),
+                RegisterUserDto userDto = new RegisterUserDto("admin@miu.edu",
+                        passwordEncoder.encode("123123"),
                         new Faculty("Payman", "Salek"), RoleCode.ADMIN);
+                admin = userService.registerUser(userDto);
+            }
+
+            // add faculty user
+            {
+                RegisterUserDto userDto = new RegisterUserDto("faculty@miu.edu",
+                        passwordEncoder.encode("123123"),
+                        new Faculty("Anthony", "Sander"), RoleCode.FACULTY);
+                faculty = userService.registerUser(userDto);
+            }
+
+            {
+                RegisterUserDto userDto = new RegisterUserDto("najeeb@miu.edu",
+                        passwordEncoder.encode("123123"),
+                        new Faculty("Najeeb", "Najeeb"), RoleCode.FACULTY);
                 userService.registerUser(userDto);
             }
 
             {
-                RegisterUserDto userDto = new RegisterUserDto("asander@miu.edu", passwordEncoder.encode("123123"),
-                        new Faculty("Anthony", "Sander"), RoleCode.ADMIN);
-                userService.registerUser(userDto);
-            }
-
-            {
-                RegisterUserDto userDto = new RegisterUserDto("najeeb@miu.edu", passwordEncoder.encode("123123"),
-                        new Faculty("Najeeb", "Najeeb"), RoleCode.ADMIN);
-                userService.registerUser(userDto);
-            }
-
-            {
-                RegisterUserDto userDto = new RegisterUserDto("rjong@miu.edu", passwordEncoder.encode("123123"),
-                        new Faculty("Ren de", "Jong"), RoleCode.ADMIN);
+                RegisterUserDto userDto = new RegisterUserDto("rjong@miu.edu",
+                        passwordEncoder.encode("123123"),
+                        new Faculty("Ren de", "Jong"), RoleCode.FACULTY);
                 userService.registerUser(userDto);
             }
 
 
             // add student user
             {
-                RegisterUserDto userDto = new RegisterUserDto("tuannx87@gmail.com", passwordEncoder.encode("123123"),
-                        new Student("Xuan Tuan", "Nguyen", "000-666999", "000-666999"), RoleCode.ADMIN);
-                userService.registerUser(userDto);
+                RegisterUserDto userDto = new RegisterUserDto("tuannx87@gmail.com",
+                        passwordEncoder.encode("123123"),
+                        new Student("Xuan Tuan", "Nguyen",
+                                "000-666999", "000-666999"), RoleCode.STUDENT);
+                student = userService.registerUser(userDto);
             }
-            Person person = new Student();
 
             {
                 RegisterUserDto userDto = new RegisterUserDto("medhane@gmail.com", passwordEncoder.encode("123123"),
@@ -174,27 +194,32 @@ public class InitializeData {
                 LocationDto location = new LocationDto(new Location(3, "Argiro", "Argiro", 60));
                 locationService.createLocation(location);
             }
-
+            Location location = null;
+            {
+                LocationDto locationDto = new LocationDto(new Location(4, "ASC-Dalby Hall", "ASC-Dalby Hall", 60));
+                location = locationService.createLocation(locationDto);
+            }
 
             // Misghinna's Damy data
 
+            Course defaultCourse = null;
             //courses
+            {
+                Course course = new Course("CS544", "EA", "Enterprise Architecture");
+                CourseOffering courseOffering = new CourseOffering();
+                courseOffering.setStartDate(LocalDate.of(2021, 5, 25));
+                courseOffering.setEndDate(LocalDate.of(2021, 6, 25));
+                courseOffering.setFaculty((Faculty) faculty.getPerson());
+                course.addCourseOffering(courseOffering);
+                defaultCourse = courseRepository.save(course);
+            }
+
             {
                 Course course = new Course("CS472", "WAP", "Web Application Programming");
                 CourseOffering courseOffering = new CourseOffering();
                 courseOffering.setStartDate(LocalDate.of(2021, 6, 21));
                 courseOffering.setEndDate(LocalDate.of(2021, 7, 21));
                 courseOffering.setFaculty((Faculty) userRepository.findByEmail("admin@miu.edu").get().getPerson());
-                course.addCourseOffering(courseOffering);
-                courseRepository.save(course);
-            }
-
-            {
-                Course course = new Course("CS544", "EA", "Enterprise Architecture");
-                CourseOffering courseOffering = new CourseOffering();
-                courseOffering.setStartDate(LocalDate.of(2021, 7, 25));
-                courseOffering.setEndDate(LocalDate.of(2021, 8, 25));
-                courseOffering.setFaculty((Faculty) userRepository.findByEmail("rjong@miu.edu").get().getPerson());
                 course.addCourseOffering(courseOffering);
                 courseRepository.save(course);
             }
@@ -215,7 +240,7 @@ public class InitializeData {
                 CourseOffering courseOffering = new CourseOffering();
                 courseOffering.setStartDate(LocalDate.of(2021, 7, 25));
                 courseOffering.setEndDate(LocalDate.of(2021, 8, 25));
-                courseOffering.setFaculty((Faculty) userRepository.findByEmail("asander@miu.edu").get().getPerson());
+                courseOffering.setFaculty((Faculty) userRepository.findByEmail("faculty@miu.edu").get().getPerson());
                 course.addCourseOffering(courseOffering);
                 courseRepository.save(course);
             }
@@ -231,7 +256,6 @@ public class InitializeData {
                 courseRepository.save(course);
             }
 
-
             //Time slots
             {
                 TimeSlot timeSlot = new TimeSlot("AM", LocalTime.of(10, 00), LocalTime.of(12, 00), "it could be More than 2 hours");
@@ -242,33 +266,41 @@ public class InitializeData {
                 timeSlotRepository.save(timeSlot);
             }
 
+            CourseOffering courseOffering = defaultCourse.getCourseOfferings().get(0);
             {
-                CourseOffering courseOffering = courseRepository.findByCode("CS72").get().getCourseOfferings().get(0);
                 for (int i = 0; i < 20; i++) {
-                    ClassSession classSession = new ClassSession();
-                    classSession.setLocation(locationRepository.findByName("Mclaughlin").get());
-                    classSession.setStartDate(courseOffering.getStartDate().plusDays(i));
-                    classSession.setCourseOffering(courseOffering);
-                    classSession.addTimeSlot(timeSlotRepository.findByAbbreviation("AM").get());
-                    classSessionRepository.save(classSession);
+                    {
+                        ClassSession classSession = new ClassSession();
+                        classSession.setLocation(location);
+                        classSession.setStartDate(courseOffering.getStartDate().plusDays(i));
+                        classSession.setCourseOffering(courseOffering);
+                        classSession.addTimeSlot(timeSlotRepository.findByAbbreviation("AM").get());
+                        classSessionRepository.save(classSession);
+                    }
+                    {
+                        ClassSession classSession = new ClassSession();
+                        classSession.setLocation(location);
+                        classSession.setStartDate(courseOffering.getStartDate().plusDays(i));
+                        classSession.setCourseOffering(courseOffering);
+                        classSession.addTimeSlot(timeSlotRepository.findByAbbreviation("PM").get());
+                        classSessionRepository.save(classSession);
+                    }
                 }
             }
 
-
             //Registration
-            CourseOffering courseOffering = courseRepository.findByCode("CS72").get().getCourseOfferings().get(0);
             {
                 {
                     Registration registration = new Registration();
-                    registration.setRegistrationTime(LocalDateTime.of(2021, 8, 25,12,00));
-                    registration.setStudent((Student) userRepository.findByEmail("tuannx87@gmail.com").get().getPerson());
+                    registration.setRegistrationTime(LocalDateTime.of(2021, 8, 25, 12, 00));
+                    registration.setStudent((Student) student.getPerson());
                     registration.setCourseOffering(courseOffering);
                     registrationRepository.save(registration);
 
                 }
                 {
                     Registration registration = new Registration();
-                    registration.setRegistrationTime(LocalDateTime.of(2021, 8, 25,12,00));
+                    registration.setRegistrationTime(LocalDateTime.of(2021, 8, 25, 12, 00));
                     registration.setStudent((Student) userRepository.findByEmail("misgna@gmail.com").get().getPerson());
                     registration.setCourseOffering(courseOffering);
                     registrationRepository.save(registration);
@@ -276,7 +308,7 @@ public class InitializeData {
                 }
                 {
                     Registration registration = new Registration();
-                    registration.setRegistrationTime(LocalDateTime.of(2021, 8, 25,12,00));
+                    registration.setRegistrationTime(LocalDateTime.of(2021, 8, 25, 12, 00));
                     registration.setStudent((Student) userRepository.findByEmail("Teddy@gmail.com").get().getPerson());
                     registration.setCourseOffering(courseOffering);
                     registrationRepository.save(registration);
@@ -285,8 +317,8 @@ public class InitializeData {
 
             }
 
-
             // Attendance Record
+            courseOffering = courseOfferingRepository.findById(courseOffering.getId()).get();
             {
                 AttendanceRecord attendanceRecord = new AttendanceRecord();
                 attendanceRecord.setScanTime(LocalDateTime.now());
@@ -319,6 +351,12 @@ public class InitializeData {
                         userDetails, null, userDetails.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
             });
+
+            System.out.println("current time slot: " + timeSlotRepository.getTimeSlot(LocalTime.now()));
+
+            System.out.println("find today class session time slot: "
+                    + classSessionRepository.findTodayClassSessionByLocationAndTimeSlot(
+                    location, timeSlotRepository.getTimeSlot(LocalTime.now()).get()));
         };
     }
 }
