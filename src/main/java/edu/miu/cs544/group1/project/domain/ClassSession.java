@@ -34,9 +34,4 @@ public class ClassSession {
         timeSlots.add(timeSlot);
 
     }
-
-    public ClassSession(Location location, List<TimeSlot> timeSlots) {
-        this.timeSlots = new ArrayList<TimeSlot>();
-        this.location = location;
-    }
 }

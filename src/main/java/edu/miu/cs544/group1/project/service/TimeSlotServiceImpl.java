@@ -5,11 +5,14 @@ import edu.miu.cs544.group1.project.domain.TimeSlot;
 import edu.miu.cs544.group1.project.repository.TimeSlotRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class TimeSlotServiceImpl implements TimeSlotService {
 
     @Autowired
@@ -55,5 +58,10 @@ public class TimeSlotServiceImpl implements TimeSlotService {
     @Override
     public void removeTimeSlot(Long id) {
         timeSlotRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<TimeSlot> getTimeSlot(LocalTime time) {
+        return timeSlotRepository.getTimeSlot(time);
     }
 }

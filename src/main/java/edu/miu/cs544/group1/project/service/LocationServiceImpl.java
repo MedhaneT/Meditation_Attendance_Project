@@ -34,15 +34,13 @@ public class LocationServiceImpl implements LocationService {
 
 
     @Override
-    public void createLocation(LocationDto locationDto) {
+    public Location createLocation(LocationDto locationDto) {
         Location location=new Location();
         location.setCapacity(locationDto.getCapacity());
         location.setDescription(locationDto.getDescription());
         location.setName(locationDto.getName());
 
-        locationRepository.save(location);
-
-
+        return locationRepository.save(location);
     }
 
     @Override

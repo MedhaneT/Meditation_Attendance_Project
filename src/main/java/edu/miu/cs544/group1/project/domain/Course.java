@@ -19,7 +19,7 @@ public class Course {
     private String name;
     private String description;
 
-    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
     @JsonIgnoreProperties(value = {"registrations"}, allowSetters = true)
     private List<CourseOffering> courseOfferings = new ArrayList<>();
 

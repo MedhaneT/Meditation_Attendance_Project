@@ -17,14 +17,14 @@ public interface AttendanceRecordService {
 
     String barcodeReader(String barcode) throws ChecksumException, FormatException, IOException, NotFoundException;
 
-    public void createAttendanceRecord(AttendanceRecordDto attendanceRecordDto);
+    void createAttendanceRecord(AttendanceRecordDto attendanceRecordDto);
 
-    public Optional<AttendanceRecord> findById(Long id);
+    Optional<AttendanceRecord> findById(Long id);
 
-    public Optional<AttendanceRecord> findByAttendanceScanTime(LocalDateTime scanTime);
+    Optional<AttendanceRecord> findByAttendanceScanTime(LocalDateTime scanTime);
 
-    public List<AttendanceRecord> findAll();
+    List<AttendanceRecord> findAll();
 
-    public void removeAttendanceRecord(Long id);
+    void removeAttendanceRecord(Long id);
 
 }
