@@ -19,6 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Configuration
@@ -35,6 +36,13 @@ public class InitializeData {
 
     @Autowired
     private TimeSlotRepository timeSlotRepository;
+
+
+    @Autowired
+    private RegistrationRepository registrationRepository;
+
+    @Autowired
+    private AttendanceRecordRepository attendanceRepository;
 
     @Bean
     public CommandLineRunner loadData(RoleRepository repository, UserRepository userRepository, UserService userService,
@@ -245,8 +253,62 @@ public class InitializeData {
                     classSessionRepository.save(classSession);
                 }
             }
-            //course offerings
 
+
+            //Registration
+            CourseOffering courseOffering = courseRepository.findByCode("CS72").get().getCourseOfferings().get(0);
+            {
+                {
+                    Registration registration = new Registration();
+                    registration.setRegistrationTime(LocalDateTime.of(2021, 8, 25,12,00));
+                    registration.setStudent((Student) userRepository.findByEmail("tuannx87@gmail.com").get().getPerson());
+                    registration.setCourseOffering(courseOffering);
+                    registrationRepository.save(registration);
+
+                }
+                {
+                    Registration registration = new Registration();
+                    registration.setRegistrationTime(LocalDateTime.of(2021, 8, 25,12,00));
+                    registration.setStudent((Student) userRepository.findByEmail("misgna@gmail.com").get().getPerson());
+                    registration.setCourseOffering(courseOffering);
+                    registrationRepository.save(registration);
+
+                }
+                {
+                    Registration registration = new Registration();
+                    registration.setRegistrationTime(LocalDateTime.of(2021, 8, 25,12,00));
+                    registration.setStudent((Student) userRepository.findByEmail("Teddy@gmail.com").get().getPerson());
+                    registration.setCourseOffering(courseOffering);
+                    registrationRepository.save(registration);
+
+                }
+
+            }
+
+
+            // Attendance Record
+            {
+                AttendanceRecord attendanceRecord = new AttendanceRecord();
+                attendanceRecord.setScanTime(LocalDateTime.now());
+                attendanceRecord.setStudent((Student) userRepository.findByEmail("Teddy@gmail.com").get().getPerson());
+                attendanceRecord.setSession(courseOffering.getSessions().get(0));
+                attendanceRepository.save(attendanceRecord);
+            }
+
+            {
+                AttendanceRecord attendanceRecord = new AttendanceRecord();
+                attendanceRecord.setScanTime(LocalDateTime.now());
+                attendanceRecord.setStudent((Student) userRepository.findByEmail("misgna@gmail.com").get().getPerson());
+                attendanceRecord.setSession(courseOffering.getSessions().get(0));
+                attendanceRepository.save(attendanceRecord);
+            }
+            {
+                AttendanceRecord attendanceRecord = new AttendanceRecord();
+                attendanceRecord.setScanTime(LocalDateTime.now());
+                attendanceRecord.setStudent((Student) userRepository.findByEmail("tuannx87@gmail.com").get().getPerson());
+                attendanceRecord.setSession(courseOffering.getSessions().get(0));
+                attendanceRepository.save(attendanceRecord);
+            }
 
             log.info("Registered Users:");
             log.info("--------------------------------------------------------------");

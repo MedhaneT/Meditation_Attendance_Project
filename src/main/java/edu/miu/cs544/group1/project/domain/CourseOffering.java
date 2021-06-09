@@ -31,7 +31,7 @@ public class CourseOffering {
     @OneToMany(mappedBy = "courseOffering")
     @JsonIgnoreProperties(value = {"courseOffering"}, allowSetters = true)
     private List<Registration> registrations;
-    @OneToMany(mappedBy = "courseOffering")
+    @OneToMany(mappedBy = "courseOffering", fetch = FetchType.EAGER)
     @JsonIgnoreProperties(value = {"courseOffering"}, allowSetters = true)
     private List<ClassSession> sessions;
 
