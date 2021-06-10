@@ -121,6 +121,14 @@ public class AttendanceRecordServiceImpl implements AttendanceRecordService {
     }
 
     @Override
+    public List<AttendanceRecordDto> findByCourseOfferings(List<CourseOffering> courseOfferings) {
+        List<AttendanceRecordDto> attendanceRecordDtos = new ArrayList<>();
+        attendanceRecordRepository.findByCourseOfferings(courseOfferings)
+                .forEach(attendanceRecord -> attendanceRecordDtos.add(new AttendanceRecordDto(attendanceRecord)));
+        return attendanceRecordDtos;
+    }
+
+    @Override
     public void removeAttendanceRecord(Long id) {
         attendanceRecordRepository.deleteById(id);
     }

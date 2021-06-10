@@ -5,9 +5,13 @@ import com.google.zxing.FormatException;
 import com.google.zxing.NotFoundException;
 import edu.miu.cs544.group1.project.controller.dto.AttendanceRecordDto;
 import edu.miu.cs544.group1.project.domain.AttendanceRecord;
+import edu.miu.cs544.group1.project.domain.CourseOffering;
+import edu.miu.cs544.group1.project.domain.Faculty;
 import edu.miu.cs544.group1.project.domain.Location;
+import edu.miu.cs544.group1.project.repository.CourseOfferingRepository;
 import edu.miu.cs544.group1.project.repository.LocationRepository;
 import edu.miu.cs544.group1.project.service.AttendanceRecordService;
+import edu.miu.cs544.group1.project.service.FacultyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +27,12 @@ public class AttendanceRecordController {
     private AttendanceRecordService attendanceRecordService;
     @Autowired
     private LocationRepository locationRepository;
+
+    @Autowired
+    private CourseOfferingRepository courseOfferingRepository;
+
+    @Autowired
+    FacultyService facultyService;
 
     @GetMapping
     public List<AttendanceRecord> findAll() {
@@ -50,6 +60,13 @@ public class AttendanceRecordController {
         Location location = locationRepository.findByName(barcodeLocation)
                 .orElseThrow(() -> new RuntimeException("Location not found"));
         attendanceRecordService.saveAttendance(barcodeString, location);
+    }
+
+    @GetMapping("/attendanceByFaculty/{facultyId}")
+    public List<AttendanceRecordDto> findByCourseOffering(@PathVariable(name = "facultyId") Long facultyId) {
+        Faculty faculty = facultyService.findById(facultyId).get();
+        List<CourseOffering> courseOfferings = faculty.getCourseOfferings();
+        return attendanceRecordService.findByCourseOfferings(courseOfferings);
     }
 
 }

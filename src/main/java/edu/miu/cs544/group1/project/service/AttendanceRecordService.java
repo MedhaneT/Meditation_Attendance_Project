@@ -22,6 +22,8 @@ public interface AttendanceRecordService {
 
     List<AttendanceRecordDto> findByCourseOffering(CourseOffering courseOffering);
 
+    List<AttendanceRecordDto> findByCourseOfferings(List<CourseOffering> courseOfferings);
+
     void removeAttendanceRecord(Long id);
 
 }

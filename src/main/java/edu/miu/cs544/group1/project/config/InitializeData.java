@@ -266,7 +266,7 @@ public class InitializeData {
                 timeSlotRepository.save(timeSlot);
             }
             {
-                TimeSlot timeSlot = new TimeSlot("PM", LocalTime.of(13, 30), LocalTime.of(22, 00), "it could be More than 1:30  hours");
+                TimeSlot timeSlot = new TimeSlot("PM", LocalTime.of(13, 30), LocalTime.of(23, 30), "it could be More than 1:30  hours");
                 timeSlotRepository.save(timeSlot);
             }
 

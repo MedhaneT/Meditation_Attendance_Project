@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Repository
@@ -21,4 +22,7 @@ public interface AttendanceRecordRepository extends JpaRepository<AttendanceReco
     List<AttendanceRecord> findByCourseOffering(
             @Param(value = "courseOffering") CourseOffering courseOffering);
 
+    @Query(value = "from AttendanceRecord where session.courseOffering in :courseOfferings")
+    List<AttendanceRecord> findByCourseOfferings(
+            @Param(value = "courseOfferings") List<CourseOffering> courseOfferings);
 }
