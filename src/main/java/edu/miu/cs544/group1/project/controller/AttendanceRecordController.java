@@ -8,11 +8,11 @@ import edu.miu.cs544.group1.project.domain.AttendanceRecord;
 import edu.miu.cs544.group1.project.domain.CourseOffering;
 import edu.miu.cs544.group1.project.domain.Faculty;
 import edu.miu.cs544.group1.project.domain.Location;
-import edu.miu.cs544.group1.project.repository.CourseOfferingRepository;
 import edu.miu.cs544.group1.project.repository.LocationRepository;
 import edu.miu.cs544.group1.project.service.AttendanceRecordService;
 import edu.miu.cs544.group1.project.service.FacultyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -27,9 +27,6 @@ public class AttendanceRecordController {
     private AttendanceRecordService attendanceRecordService;
     @Autowired
     private LocationRepository locationRepository;
-
-    @Autowired
-    private CourseOfferingRepository courseOfferingRepository;
 
     @Autowired
     FacultyService facultyService;
@@ -54,7 +51,8 @@ public class AttendanceRecordController {
     }
 
     @PostMapping("/{barcodeLocation}/{barcodeString}")
-    public void barcodeAttedance(
+    @Secured({"ROLE_ADMIN"})
+    public void barcodeAttendance(
             @PathVariable(name = "barcodeLocation") String barcodeLocation,
             @PathVariable(name = "barcodeString") String barcodeString) throws ChecksumException, NotFoundException, IOException, FormatException {
         Location location = locationRepository.findByName(barcodeLocation)

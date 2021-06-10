@@ -31,7 +31,7 @@ public class JPAUserDetails implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles.stream()
-                .map(role -> (GrantedAuthority) role.getCode()::name).collect(Collectors.toList());
+                .map(role -> (GrantedAuthority) role.getCode()::toAuthority).collect(Collectors.toList());
     }
 
     @Override
