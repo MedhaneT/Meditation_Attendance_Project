@@ -17,6 +17,7 @@ import java.util.Optional;
 public interface TimeSlotRepository extends JpaRepository<TimeSlot, Long> {
     Optional<TimeSlot> findByAbbreviation(String abbreviation);
 
-    @org.springframework.data.jpa.repository.Query(value = "FROM TimeSlot WHERE :time BETWEEN startTime AND endTime")
+    @org.springframework.data.jpa.repository.Query(
+            value = "FROM TimeSlot WHERE :time BETWEEN startTime AND endTime")
     Optional<TimeSlot> getTimeSlot(@Param("time") LocalTime time);
 }

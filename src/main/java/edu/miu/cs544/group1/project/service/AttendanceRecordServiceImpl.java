@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -41,7 +42,7 @@ public class AttendanceRecordServiceImpl implements AttendanceRecordService {
     @Autowired
     private TimeSlotService timeSlotService;
 
- //   @Override
+    //   @Override
 //    public String barcodeReader(String barcode) throws ChecksumException, NotFoundException, FormatException, IOException {
 //
 //        InputStream barCodeInputStream = new FileInputStream(barcode);
@@ -73,7 +74,8 @@ public class AttendanceRecordServiceImpl implements AttendanceRecordService {
         AttendanceRecord attendanceRecord = new AttendanceRecord();
         LocalDateTime scanTime = attendanceRecordDto.getScanTime();
         attendanceRecord.setScanTime(scanTime);
-        Optional<Student> student = studentRepository.findByBarcodeId(attendanceRecordDto.getStudentBarCodeId());
+        Optional<Student> student = studentRepository.findByBarcodeId(
+                attendanceRecordDto.getStudent().getBarcodeId());
         Student student1 = student.orElseThrow(() -> new UsernameNotFoundException("Student Not Found"));
         attendanceRecord.setStudent(student1);
 
@@ -111,8 +113,15 @@ public class AttendanceRecordServiceImpl implements AttendanceRecordService {
     }
 
     @Override
-    public void removeAttendanceRecord(Long id) {
+    public List<AttendanceRecordDto> findByCourseOffering(CourseOffering courseOffering) {
+        List<AttendanceRecordDto> attendanceRecordDtos = new ArrayList<>();
+        attendanceRecordRepository.findByCourseOffering(courseOffering)
+                .forEach(attendanceRecord -> attendanceRecordDtos.add(new AttendanceRecordDto(attendanceRecord)));
+        return attendanceRecordDtos;
+    }
 
+    @Override
+    public void removeAttendanceRecord(Long id) {
         attendanceRecordRepository.deleteById(id);
     }
 }

@@ -1,13 +1,9 @@
 package edu.miu.cs544.group1.project.controller.dto;
 
-import edu.miu.cs544.group1.project.domain.ClassSession;
-import edu.miu.cs544.group1.project.domain.Student;
+import edu.miu.cs544.group1.project.domain.AttendanceRecord;
 import lombok.Data;
 import lombok.Value;
 
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
 @Data
@@ -15,14 +11,13 @@ import java.time.LocalDateTime;
 public class AttendanceRecordDto {
 
     private LocalDateTime scanTime;
+    private StudentDto student;
+    private ClassSessionDto classSession;
 
-    private String studentBarCodeId;
-
-
-
-
-    public AttendanceRecordDto(String studentBarCodeId, String sessionId) {
-        this.studentBarCodeId= studentBarCodeId;
-        this.scanTime=LocalDateTime.now();
+    public AttendanceRecordDto(
+            AttendanceRecord attendanceRecord) {
+        this.student = new StudentDto(attendanceRecord.getStudent());
+        this.classSession = new ClassSessionDto(attendanceRecord.getSession());
+        this.scanTime = LocalDateTime.now();
     }
 }

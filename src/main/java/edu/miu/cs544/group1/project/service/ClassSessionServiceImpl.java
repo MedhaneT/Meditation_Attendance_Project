@@ -43,30 +43,29 @@ public class ClassSessionServiceImpl implements ClassSessionService {
 
     @Override
     public void createClassSession(ClassSessionDto classSessionDto) {
-        ClassSession classSession = new ClassSession();
-
-        String startDate = classSessionDto.getStartDate();
-        int sYear = Integer.parseInt(startDate.substring(0, 4));
-        int sMonth = Integer.parseInt(startDate.substring(5, 7));
-        int sDay = Integer.parseInt(startDate.substring(8));
-        classSession.setStartDate(LocalDate.of(sYear, sMonth, sDay));
-
-        Optional<Location> location = locationRepository.findByName(classSessionDto.getLocationName());
-        Location location1 = location.orElseThrow(() -> new IllegalArgumentException("Location Not Found"));
-        classSession.setLocation(location1);
-
-        Optional<TimeSlot> timeSlot = timeSlotRepository.findByAbbreviation(classSessionDto.getTimeSlot());
-        TimeSlot timeSlot1 = timeSlot.orElseThrow(() -> new IllegalArgumentException("TimeSlot Not Found"));
-        classSession.addTimeSlot(timeSlot1);
-
-        Optional<CourseOffering> courseOffering = courseOfferingRepository.findById(classSessionDto.getCourseOfferingId());
-        CourseOffering courseOffering1 = courseOffering.orElseThrow(() -> new IllegalArgumentException("Courseoffering Not Found"));
-        classSession.setCourseOffering(courseOffering1);
-        courseOffering1.addClassSession(classSession);
-
-        classSessionRepository.save(classSession);
-
-
+//        ClassSession classSession = new ClassSession();
+//
+//        LocalDate startDate = classSessionDto.getStartDate();
+////        int sYear = Integer.parseInt(startDate.substring(0, 4));
+////        int sMonth = Integer.parseInt(startDate.substring(5, 7));
+////        int sDay = Integer.parseInt(startDate.substring(8));
+////        classSession.setStartDate(LocalDate.of(sYear, sMonth, sDay));
+//        classSession.setStartDate(startDate);
+//
+//        Optional<Location> location = locationRepository.findByName(classSessionDto.getLocationName());
+//        Location location1 = location.orElseThrow(() -> new IllegalArgumentException("Location Not Found"));
+//        classSession.setLocation(location1);
+//
+//        Optional<TimeSlot> timeSlot = timeSlotRepository.findByAbbreviation(classSessionDto.getTimeSlots().);
+//        TimeSlot timeSlot1 = timeSlot.orElseThrow(() -> new IllegalArgumentException("TimeSlot Not Found"));
+//        classSession.addTimeSlot(timeSlot1);
+//
+//        Optional<CourseOffering> courseOffering = courseOfferingRepository.findById(classSessionDto.getCourseOfferingId());
+//        CourseOffering courseOffering1 = courseOffering.orElseThrow(() -> new IllegalArgumentException("Courseoffering Not Found"));
+//        classSession.setCourseOffering(courseOffering1);
+//        courseOffering1.addClassSession(classSession);
+//
+//        classSessionRepository.save(classSession);
     }
 
     @Override

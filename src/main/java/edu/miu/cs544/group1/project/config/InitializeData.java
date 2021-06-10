@@ -5,6 +5,7 @@ import edu.miu.cs544.group1.project.controller.dto.RegisterUserDto;
 import edu.miu.cs544.group1.project.domain.*;
 import edu.miu.cs544.group1.project.domain.enumerated.RoleCode;
 import edu.miu.cs544.group1.project.repository.*;
+import edu.miu.cs544.group1.project.service.AttendanceRecordService;
 import edu.miu.cs544.group1.project.service.LocationService;
 import edu.miu.cs544.group1.project.service.UserService;
 import lombok.extern.log4j.Log4j2;
@@ -43,6 +44,9 @@ public class InitializeData {
 
     @Autowired
     private AttendanceRecordRepository attendanceRepository;
+
+    @Autowired
+    private AttendanceRecordService attendanceRecordService;
 
     @Bean
     public CommandLineRunner loadData(RoleRepository roleRepository,
@@ -262,7 +266,7 @@ public class InitializeData {
                 timeSlotRepository.save(timeSlot);
             }
             {
-                TimeSlot timeSlot = new TimeSlot("PM", LocalTime.of(13, 30), LocalTime.of(15, 00), "it could be More than 1:30  hours");
+                TimeSlot timeSlot = new TimeSlot("PM", LocalTime.of(13, 30), LocalTime.of(22, 00), "it could be More than 1:30  hours");
                 timeSlotRepository.save(timeSlot);
             }
 
@@ -357,6 +361,9 @@ public class InitializeData {
             System.out.println("find today class session time slot: "
                     + classSessionRepository.findTodayClassSessionByLocationAndTimeSlot(
                     location, timeSlotRepository.getTimeSlot(LocalTime.now()).get()));
+
+            System.out.println("List attendance by course offering: "
+                    + attendanceRecordService.findByCourseOffering(courseOffering));
         };
     }
 }
